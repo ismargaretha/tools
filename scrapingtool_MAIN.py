@@ -109,11 +109,12 @@ MenuOption = namedtuple('MenuOption', 'id, name')
 
 ###### Save to "History" folder and overwrite the today.csv file ##########
 
-list_of_files = glob.glob("/**/*/*/*/TC_Crawling Tool/History/*.csv") # * means all if need specific format then *.csv
-last_file = max(list_of_files, key=os.path.getctime) #find the name of the latest run
-base_name_ext = os.path.basename(last_file) #assign the name of the latest file
+path = os.path.abspath("History")
+dirs = os.listdir(path)
+base_name_ext = max(dirs) #find the name of the latest run
 base_name = os.path.splitext(base_name_ext)[0]
 
+##### Copy the latest file into our main folder ####
 def last():
     path = os.path.abspath("History")
     newPath = os.path.abspath("")
@@ -256,9 +257,9 @@ else:
 
 ###### Save to "History" folder and overwrite the today.csv file ##########
 
-filex = glob.glob("/**/*/*/*/TC_Crawling Tool/History/*.csv") # * means all if need specific format then *.csv
-tod_file = max(filex, key=os.path.getctime) #find the name of the latest run
-today_file = os.path.basename(tod_file) #assign the name of the latest file
+path = os.path.abspath("History")
+dirs = os.listdir(path)
+today_file = max(dirs) #find the name of the latest run for today
 
 def today():
     path = os.path.abspath("History")
