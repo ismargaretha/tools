@@ -38,11 +38,11 @@ def argenta():
     try:
         global arge_c
         df_arge = read_pdf('https://www.argenta.be/content/dam/argenta/documents/emprunter/credit-logement/Feuille%20de%20tarifs%20Cr%C3%A9dits%20hypoth%C3%A9caires.pdf', encoding='ISO-8859-1',
-                           pages=2, area=[200.21, -0.3, 536.58, 383.53], stream=True, spreadsheet=True, pandas_options={'header': None})
+                           pages=2, area=[201.94, 1.97, 539.93, 384.42], stream=True, spreadsheet=True, pandas_options={'header': None})
         df_arge0001 = df_arge.drop(df_arge.index[3:27]).drop(df_arge.index[1])
         df_arge0001 = pd.DataFrame(df_arge0001.values.reshape(1, -1), columns=None)  # pivot the row matrix to column
         df_arge0001 = df_arge0001.dropna(axis='columns')  # drop all the NaN columns
-        df_arge0001.drop(df_arge0001.columns[3], axis=1, inplace=True)  # drop the CAP columns
+        df_arge0001.drop(df_arge0001.columns[3], axis=1, inplace=True)
         df_arge0001.drop(df_arge0001.columns[4], axis=1, inplace=True)
         df_arge0001.columns = ["Formules", "Min", "Max", "Taux"]
         df_arge0001.insert(0, 'Provider', 'Argenta')
@@ -50,15 +50,17 @@ def argenta():
         df_arge0001.insert(2, 'Product_ID', 'ARGE0001')
         df_arge0001["Min"] = df_arge0001["Min"].str.replace(" ans", "").str.strip()  # delete "Ans" in Min and Max
         df_arge0001["Max"] = df_arge0001["Max"].str.replace(" ans", "").str.strip()
+        df_arge0001["Taux"] = df_arge0001["Taux"].str.replace(",", ".").str.strip()
         df_arge0001["Taux"] = df_arge0001["Taux"].str.replace("%", "").str.strip()
-        df_arge0001 = df_arge0001[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+        df_arge0001 = df_arge0001[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]
 
     ###############################################################################################################
     ############################################ARGE0002###########################################################
         df_arge0002 = df_arge.drop(df_arge.index[0:3]).drop(df_arge.index[6:27])
         df_arge0002 = pd.DataFrame(df_arge0002.values.reshape(1, -1), columns=None)  # pivot the row matrix to column
         df_arge0002 = df_arge0002.dropna(axis='columns')  # drop all the NaN columns
-        df_arge0002.drop(df_arge0002.columns[3:5], axis=1, inplace=True)  # drop the CAP columns
+        df_arge0002.drop(df_arge0002.columns[3], axis=1, inplace=True)  # drop the CAP columns
+        df_arge0002.drop(df_arge0002.columns[3], axis=1, inplace=True)
         df_arge0002.drop(df_arge0002.columns[4], axis=1, inplace=True)
         df_arge0002.columns = ["Formules", "Min", "Max", "Taux"]
         df_arge0002.insert(0, 'Provider', 'Argenta')
@@ -66,15 +68,16 @@ def argenta():
         df_arge0002.insert(2, 'Product_ID', 'ARGE0002')
         df_arge0002["Min"] = df_arge0002["Min"].str.replace(" ans", "").str.strip()  # delete "Ans" in Min and Max
         df_arge0002["Max"] = df_arge0002["Max"].str.replace(" ans", "").str.strip()
+        df_arge0002["Taux"] = df_arge0002["Taux"].str.replace(",", ".").str.strip()
         df_arge0002["Taux"] = df_arge0002["Taux"].str.replace("%", "").str.strip()
         df_arge0002 = df_arge0002[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
-    ###############################################################################################################
+        ###############################################################################################################
     ############################################ARGE0003###########################################################
-        df_arge0003 = df_arge.drop(df_arge.index[0:6]).drop(df_arge.index[9:27])
+        df_arge0003 = df_arge.drop(df_arge.index[0:6]).drop(df_arge.index[9:27]).drop(df_arge.index[7])
         df_arge0003 = pd.DataFrame(df_arge0003.values.reshape(1, -1), columns=None)  # pivot the row matrix to column
         df_arge0003 = df_arge0003.dropna(axis='columns')  # drop all the NaN columns
-        df_arge0003.drop(df_arge0003.columns[3:5], axis=1, inplace=True)  # drop the CAP columns
+        df_arge0003.drop(df_arge0003.columns[3], axis=1, inplace=True)  # drop the CAP columns
         df_arge0003.drop(df_arge0003.columns[4], axis=1, inplace=True)
         df_arge0003.columns = ["Formules", "Min", "Max", "Taux"]
         df_arge0003.insert(0, 'Provider', 'Argenta')
@@ -82,15 +85,16 @@ def argenta():
         df_arge0003.insert(2, 'Product_ID', 'ARGE0003')
         df_arge0003["Min"] = df_arge0003["Min"].str.replace(" ans", "").str.strip()  # delete "Ans" in Min and Max
         df_arge0003["Max"] = df_arge0003["Max"].str.replace(" ans", "").str.strip()
+        df_arge0003["Taux"] = df_arge0003["Taux"].str.replace(",", ".").str.strip()
         df_arge0003["Taux"] = df_arge0003["Taux"].str.replace("%", "").str.strip()
         df_arge0003 = df_arge0003[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
     ###############################################################################################################
     ############################################ARGE0004###########################################################
-        df_arge0004 = df_arge.drop(df_arge.index[0:9]).drop(df_arge.index[12:27])
+        df_arge0004 = df_arge.drop(df_arge.index[0:9]).drop(df_arge.index[12:27]).drop(df_arge.index[10])
         df_arge0004 = pd.DataFrame(df_arge0004.values.reshape(1, -1), columns=None)  # pivot the row matrix to column
         df_arge0004 = df_arge0004.dropna(axis='columns')  # drop all the NaN columns
-        df_arge0004.drop(df_arge0004.columns[3:5], axis=1, inplace=True)  # drop the CAP columns
+        df_arge0004.drop(df_arge0004.columns[3], axis=1, inplace=True)  # drop the CAP columns
         df_arge0004.drop(df_arge0004.columns[4], axis=1, inplace=True)
         df_arge0004.columns = ["Formules", "Min", "Max", "Taux"]
         df_arge0004.insert(0, 'Provider', 'Argenta')
@@ -98,15 +102,16 @@ def argenta():
         df_arge0004.insert(2, 'Product_ID', 'ARGE0004')
         df_arge0004["Min"] = df_arge0004["Min"].str.replace(" ans", "").str.strip()  # delete "Ans" in Min and Max
         df_arge0004["Max"] = df_arge0004["Max"].str.replace(" ans", "").str.strip()
+        df_arge0004["Taux"] = df_arge0004["Taux"].str.replace(",", ".").str.strip()
         df_arge0004["Taux"] = df_arge0004["Taux"].str.replace("%", "").str.strip()
         df_arge0004 = df_arge0004[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
     ###############################################################################################################
     ############################################ARGE0005###########################################################
-        df_arge0005 = df_arge.drop(df_arge.index[0:12]).drop(df_arge.index[15:27])
+        df_arge0005 = df_arge.drop(df_arge.index[0:12]).drop(df_arge.index[15:27]).drop(df_arge.index[13])
         df_arge0005 = pd.DataFrame(df_arge0005.values.reshape(1, -1), columns=None)  # pivot the row matrix to column
         df_arge0005 = df_arge0005.dropna(axis='columns')  # drop all the NaN columns
-        df_arge0005.drop(df_arge0005.columns[3:5], axis=1, inplace=True)  # drop the CAP columns
+        df_arge0005.drop(df_arge0005.columns[3], axis=1, inplace=True)  # drop the CAP columns
         df_arge0005.drop(df_arge0005.columns[4], axis=1, inplace=True)
         df_arge0005.columns = ["Formules", "Min", "Max", "Taux"]
         df_arge0005.insert(0, 'Provider', 'Argenta')
@@ -114,15 +119,16 @@ def argenta():
         df_arge0005.insert(2, 'Product_ID', 'ARGE0005')
         df_arge0005["Min"] = df_arge0005["Min"].str.replace(" ans", "").str.strip()  # delete "Ans" in Min and Max
         df_arge0005["Max"] = df_arge0005["Max"].str.replace(" ans", "").str.strip()
+        df_arge0005["Taux"] = df_arge0005["Taux"].str.replace(",", ".").str.strip()
         df_arge0005["Taux"] = df_arge0005["Taux"].str.replace("%", "").str.strip()
         df_arge0005 = df_arge0005[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
-    ###############################################################################################################
+        ###############################################################################################################
     ############################################ARGE0006###########################################################
-        df_arge0006 = df_arge.drop(df_arge.index[0:15]).drop(df_arge.index[18:27])
+        df_arge0006 = df_arge.drop(df_arge.index[0:15]).drop(df_arge.index[18:27]).drop(df_arge.index[16])
         df_arge0006 = pd.DataFrame(df_arge0006.values.reshape(1, -1), columns=None)  # pivot the row matrix to column
         df_arge0006 = df_arge0006.dropna(axis='columns')  # drop all the NaN columns
-        df_arge0006.drop(df_arge0006.columns[3:5], axis=1, inplace=True)  # drop the CAP columns
+        df_arge0006.drop(df_arge0006.columns[3], axis=1, inplace=True)  # drop the CAP columns
         df_arge0006.drop(df_arge0006.columns[4], axis=1, inplace=True)
         df_arge0006.columns = ["Formules", "Min", "Max", "Taux"]
         df_arge0006.insert(0, 'Provider', 'Argenta')
@@ -130,15 +136,16 @@ def argenta():
         df_arge0006.insert(2, 'Product_ID', 'ARGE0006')
         df_arge0006["Min"] = df_arge0006["Min"].str.replace(" ans", "").str.strip()  # delete "Ans" in Min and Max
         df_arge0006["Max"] = df_arge0006["Max"].str.replace(" ans", "").str.strip()
+        df_arge0006["Taux"] = df_arge0006["Taux"].str.replace(",", ".").str.strip()
         df_arge0006["Taux"] = df_arge0006["Taux"].str.replace("%", "").str.strip()
         df_arge0006 = df_arge0006[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
     ###############################################################################################################
     ############################################ARGE0007###########################################################
-        df_arge0007 = df_arge.drop(df_arge.index[0:18]).drop(df_arge.index[21:27])
+        df_arge0007 = df_arge.drop(df_arge.index[0:18]).drop(df_arge.index[21:27]).drop(df_arge.index[19])
         df_arge0007 = pd.DataFrame(df_arge0007.values.reshape(1, -1), columns=None)  # pivot the row matrix to column
         df_arge0007 = df_arge0007.dropna(axis='columns')  # drop all the NaN columns
-        df_arge0007.drop(df_arge0007.columns[3:5], axis=1, inplace=True)  # drop the CAP columns
+        df_arge0007.drop(df_arge0007.columns[3], axis=1, inplace=True)  # drop the CAP columns
         df_arge0007.drop(df_arge0007.columns[4], axis=1, inplace=True)
         df_arge0007.columns = ["Formules", "Min", "Max", "Taux"]
         df_arge0007.insert(0, 'Category', 'Home Loan')
@@ -146,15 +153,16 @@ def argenta():
         df_arge0007.insert(2, 'Product_ID', 'ARGE0007')
         df_arge0007["Min"] = df_arge0007["Min"].str.replace(" ans", "").str.strip()  # delete "Ans" in Min and Max
         df_arge0007["Max"] = df_arge0007["Max"].str.replace(" ans", "").str.strip()
+        df_arge0007["Taux"] = df_arge0007["Taux"].str.replace(",", ".").str.strip()
         df_arge0007["Taux"] = df_arge0007["Taux"].str.replace("%", "").str.strip()
         df_arge0007 = df_arge0007[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
-    ###############################################################################################################
+        ###############################################################################################################
     ############################################ARGE0008###########################################################
-        df_arge0008 = df_arge.drop(df_arge.index[0:21]).drop(df_arge.index[24:27])
+        df_arge0008 = df_arge.drop(df_arge.index[0:21]).drop(df_arge.index[24:27]).drop(df_arge.index[22])
         df_arge0008 = pd.DataFrame(df_arge0008.values.reshape(1, -1), columns=None)  # pivot the row matrix to column
         df_arge0008 = df_arge0008.dropna(axis='columns')  # drop all the NaN columns
-        df_arge0008.drop(df_arge0008.columns[3:5], axis=1, inplace=True)  # drop the CAP columns
+        df_arge0008.drop(df_arge0008.columns[3], axis=1, inplace=True)  # drop the CAP columns
         df_arge0008.drop(df_arge0008.columns[4], axis=1, inplace=True)
         df_arge0008.columns = ["Formules", "Min", "Max", "Taux"]
         df_arge0008.insert(0, 'Provider', 'Argenta')
@@ -162,15 +170,16 @@ def argenta():
         df_arge0008.insert(2, 'Product_ID', 'ARGE0008')
         df_arge0008["Min"] = df_arge0008["Min"].str.replace(" ans", "").str.strip()  # delete "Ans" in Min and Max
         df_arge0008["Max"] = df_arge0008["Max"].str.replace(" ans", "").str.strip()
+        df_arge0008["Taux"] = df_arge0008["Taux"].str.replace(",", ".").str.strip()
         df_arge0008["Taux"] = df_arge0008["Taux"].str.replace("%", "").str.strip()
         df_arge0008 = df_arge0008[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
     ###############################################################################################################
     ############################################ARGE0009###########################################################
-        df_arge0009 = df_arge.drop(df_arge.index[0:21]).drop(df_arge.index[24:27])
+        df_arge0009 = df_arge.drop(df_arge.index[0:24]).drop(df_arge.index[25])
         df_arge0009 = pd.DataFrame(df_arge0009.values.reshape(1, -1), columns=None)  # pivot the row matrix to column
         df_arge0009 = df_arge0009.dropna(axis='columns')  # drop all the NaN columns
-        df_arge0009.drop(df_arge0009.columns[3:5], axis=1, inplace=True)  # drop the CAP columns
+        df_arge0009.drop(df_arge0009.columns[3], axis=1, inplace=True)  # drop the CAP columns
         df_arge0009.drop(df_arge0009.columns[4], axis=1, inplace=True)
         df_arge0009.columns = ["Formules", "Min", "Max", "Taux"]
         df_arge0009.insert(0, 'Provider', 'Argenta')
@@ -178,6 +187,7 @@ def argenta():
         df_arge0009.insert(2, 'Product_ID', 'ARGE0009')
         df_arge0009["Min"] = df_arge0009["Min"].str.replace(" ans", "").str.strip()  # delete "Ans" in Min and Max
         df_arge0009["Max"] = df_arge0009["Max"].str.replace(" ans", "").str.strip()
+        df_arge0009["Taux"] = df_arge0009["Taux"].str.replace(",", ".").str.strip()
         df_arge0009["Taux"] = df_arge0009["Taux"].str.replace("%", "").str.strip()
         df_arge0009 = df_arge0009[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
@@ -222,12 +232,14 @@ def bvbr():
         df_bvbr0001 = df_bvbr1.drop(df_bvbr1.index[0])
         df_bvbr0001 = df_bvbr0001.drop(df_bvbr0001.columns[2:5], axis=1)
         df_bvbr0001.columns = ["Formules", "Taux"]
-        df_bvbr0001["Formules"] = df_bvbr0001["Formules"].str.replace("Ã©", "é").str.strip()
+        df_bvbr0001["Formules"] = df_bvbr0001["Formules"].str.replace("Ã©", "e").str.strip()
+        df_bvbr0001["Taux"] = df_bvbr0001["Taux"].str.replace(",", ".").str.strip()
         df_bvbr0001["Taux"] = df_bvbr0001["Taux"].str.replace("%", "").str.strip()
+
         Min_bvbr0001 = pd.DataFrame({'Min': ['', '0', '2', '4', '6', '11', '16']})
         Max_bvbr0001 = pd.DataFrame({'Max': ['', '1', '3', '5', '10', '15', '20']})
         duration_bvbr0001 = Min_bvbr0001.join(Max_bvbr0001)
-        df_bvbr0001.insert(0, 'Provider', 'Banque Van Breda')
+        df_bvbr0001.insert(0, 'Provider', 'Bank Van Breda')
         df_bvbr0001.insert(0, 'Category', 'Home Loan')
         df_bvbr0001.insert(1, 'Product_ID', 'BVBR0001')
         df_bvbr0001 = df_bvbr0001.join(duration_bvbr0001)  # join newly made df with existed df
@@ -246,7 +258,8 @@ def bvbr():
         df_bvbr0002.drop('_', axis=1, inplace=True)
 
         # ##Naming purpose
-        df_bvbr0002["Formules"] = df_bvbr0002["Formules"].str.replace("Ã©", "é").str.strip()
+        df_bvbr0002["Formules"] = df_bvbr0002["Formules"].str.replace("Ã©", "e").str.strip()
+        df_bvbr0002["Taux"] = df_bvbr0002["Taux"].str.replace(",", ".").str.strip()
         df_bvbr0002["Taux"] = df_bvbr0002["Taux"].str.replace("%", "").str.strip()
 
         ##Assigning duration: this case doesn't have any duration indicated
@@ -254,7 +267,7 @@ def bvbr():
         Max_bvbr0002 = pd.DataFrame({'Max': [''] * 1 + ['']})
         duration_bvbr0002 = Min_bvbr0002.join(Max_bvbr0002)
 
-        df_bvbr0002.insert(0, 'Provider', 'Banque Van Breda')
+        df_bvbr0002.insert(0, 'Provider', 'Bank Van Breda')
         df_bvbr0002.insert(0, 'Category', 'Home Loan')
         df_bvbr0002.insert(1, 'Product_ID', 'BVBR0002')
         df_bvbr0002 = df_bvbr0002.join(duration_bvbr0002)  # join newly made df with existed df
@@ -270,7 +283,8 @@ def bvbr():
         df_bvbr0003.drop('_', axis=1, inplace=True)
 
         # ##Naming purpose
-        df_bvbr0003["Formules"] = df_bvbr0003["Formules"].str.replace("Ã©", "é").str.strip()
+        df_bvbr0003["Formules"] = df_bvbr0003["Formules"].str.replace("Ã©", "e").str.strip()
+        df_bvbr0003["Taux"] = df_bvbr0003["Taux"].str.replace(",", ".").str.strip()
         df_bvbr0003["Taux"] = df_bvbr0003["Taux"].str.replace("%", "").str.strip()
 
         ##Assigning duration: this case doesn't have any duration indicated
@@ -278,7 +292,7 @@ def bvbr():
         Max_bvbr0003 = pd.DataFrame({'Max': [''] * 4 + ['']})
         duration_bvbr0003 = Min_bvbr0003.join(Max_bvbr0003)
 
-        df_bvbr0003.insert(0, 'Provider', 'Banque Van Breda')
+        df_bvbr0003.insert(0, 'Provider', 'Bank Van Breda')
         df_bvbr0003.insert(0, 'Category', 'Home Loan')
         df_bvbr0003.insert(1, 'Product_ID', 'BVBR0003')
         df_bvbr0003 = df_bvbr0003.join(duration_bvbr0003)  # join newly made df with existed df
@@ -295,7 +309,8 @@ def bvbr():
         df_bvbr0004.drop('_', axis=1, inplace=True)
 
         # ##Naming purpose
-        df_bvbr0004["Formules"] = df_bvbr0004["Formules"].str.replace("Ã©", "é").str.strip()
+        df_bvbr0004["Formules"] = df_bvbr0004["Formules"].str.replace("Ã©", "e").str.strip()
+        df_bvbr0004["Taux"] = df_bvbr0004["Taux"].str.replace(",", ".").str.strip()
         df_bvbr0004["Taux"] = df_bvbr0004["Taux"].str.replace("%", "").str.strip()
 
         ##Assigning duration: this case doesn't have any duration indicated
@@ -303,7 +318,7 @@ def bvbr():
         Max_bvbr0004 = pd.DataFrame({'Max': [''] * 7 + ['']})
         duration_bvbr0004 = Min_bvbr0004.join(Max_bvbr0004)
 
-        df_bvbr0004.insert(0, 'Provider', 'Banque Van Breda')
+        df_bvbr0004.insert(0, 'Provider', 'Bank Van Breda')
         df_bvbr0004.insert(0, 'Category', 'Home Loan')
         df_bvbr0004.insert(1, 'Product_ID', 'BVBR0004')
         df_bvbr0004 = df_bvbr0004.join(duration_bvbr0004)  # join newly made df with existed df
@@ -319,7 +334,8 @@ def bvbr():
         df_bvbr0005.drop('_', axis=1, inplace=True)
 
         # ##Naming purpose
-        df_bvbr0005["Formules"] = df_bvbr0005["Formules"].str.replace("Ã©", "é").str.strip()
+        df_bvbr0005["Formules"] = df_bvbr0005["Formules"].str.replace("Ã©", "e").str.strip()
+        df_bvbr0005["Taux"] = df_bvbr0005["Taux"].str.replace(",", ".").str.strip()
         df_bvbr0005["Taux"] = df_bvbr0005["Taux"].str.replace("%", "").str.strip()
 
         ##Assigning duration: this case doesn't have any duration indicated
@@ -327,7 +343,7 @@ def bvbr():
         Max_bvbr0005 = pd.DataFrame({'Max': [''] * 10 + ['']})
         duration_bvbr0005 = Min_bvbr0005.join(Max_bvbr0005)
 
-        df_bvbr0005.insert(0, 'Provider', 'Banque Van Breda')
+        df_bvbr0005.insert(0, 'Provider', 'Bank Van Breda')
         df_bvbr0005.insert(0, 'Category', 'Home Loan')
         df_bvbr0005.insert(1, 'Product_ID', 'BVBR0005')
         df_bvbr0005 = df_bvbr0005.join(duration_bvbr0005)  # join newly made df with existed df
@@ -343,7 +359,8 @@ def bvbr():
         df_bvbr0006.drop('_', axis=1, inplace=True)
 
         # ##Naming purpose
-        df_bvbr0006["Formules"] = df_bvbr0006["Formules"].str.replace("Ã©", "é").str.strip()
+        df_bvbr0006["Formules"] = df_bvbr0006["Formules"].str.replace("Ã©", "e").str.strip()
+        df_bvbr0006["Taux"] = df_bvbr0006["Taux"].str.replace(",", ".").str.strip()
         df_bvbr0006["Taux"] = df_bvbr0006["Taux"].str.replace("%", "").str.strip()
 
         # ##Assigning duration: this case doesn't have any duration indicated
@@ -351,7 +368,7 @@ def bvbr():
         Max_bvbr0006 = pd.DataFrame({'Max': [''] * 13 + ['']})
         duration_bvbr0006 = Min_bvbr0006.join(Max_bvbr0006)
 
-        df_bvbr0006.insert(0, 'Provider', 'Banque Van Breda')
+        df_bvbr0006.insert(0, 'Provider', 'Bank Van Breda')
         df_bvbr0006.insert(0, 'Category', 'Home Loan')
         df_bvbr0006.insert(1, 'Product_ID', 'BVBR0006')
         df_bvbr0006 = df_bvbr0006.join(duration_bvbr0006)  # join newly made df with existed df
@@ -367,7 +384,8 @@ def bvbr():
         df_bvbr0007.drop('_', axis=1, inplace=True)
 
         # ##Naming purpose
-        df_bvbr0007["Formules"] = df_bvbr0007["Formules"].str.replace("Ã©", "é").str.strip()
+        df_bvbr0007["Formules"] = df_bvbr0007["Formules"].str.replace("Ã©", "e").str.strip()
+        df_bvbr0007["Taux"] = df_bvbr0007["Taux"].str.replace(",", ".").str.strip()
         df_bvbr0007["Taux"] = df_bvbr0007["Taux"].str.replace("%", "").str.strip()
 
         ##Assigning duration: this case doesn't have any duration indicated
@@ -375,7 +393,7 @@ def bvbr():
         Max_bvbr0007 = pd.DataFrame({'Max': [''] * 16 + ['']})
         duration_bvbr0007 = Min_bvbr0007.join(Max_bvbr0007)
 
-        df_bvbr0007.insert(0, 'Provider', 'Banque Van Breda')
+        df_bvbr0007.insert(0, 'Provider', 'Bank Van Breda')
         df_bvbr0007.insert(0, 'Category', 'Home Loan')
         df_bvbr0007.insert(1, 'Product_ID', 'BVBR0007')
         df_bvbr0007 = df_bvbr0007.join(duration_bvbr0007)  # join newly made df with existed df
@@ -533,7 +551,9 @@ def belfius():
         df_belf0001.columns = ["Formules", "Min", "Max", "Taux"]
         df_belf0001["Min"] = df_belf0001["Min"].str.replace(" mois", "").str.strip()  # delete "Mois" in Min and Max
         df_belf0001["Max"] = df_belf0001["Max"].str.replace(" mois", "").str.strip()
-        df_belf0001["Taux"] = df_belf0001["Taux"].str.replace("%", "").str.strip()
+        df_belf0001["Taux"] = df_belf0001["Taux"].str.replace(",", ".").str.strip()
+        df_belf0001["Taux"] = df_belf0001["Taux"].str.replace(" %", "").str.strip()  # delete % so we can calculate below
+        df_belf0001["Taux"] = ((df_belf0001["Taux"].astype(float) / 100) + (0.5 / 100)) * 100  # multiply values by specific rate of 0.5%
         df_belf0001.insert(0, 'Provider', 'Belfius')
         df_belf0001.insert(1, 'Product_ID', 'BELF0001')
         df_belf0001.insert(2, 'Category', 'Home Loan')
@@ -550,7 +570,9 @@ def belfius():
         df_belf0002.columns = ["Formules", "Min", "Max", "Taux"]
         df_belf0002["Min"] = df_belf0002["Min"].str.replace(" mois", "").str.strip()  # delete "Mois" in Min and Max
         df_belf0002["Max"] = df_belf0002["Max"].str.replace(" mois", "").str.strip()
-        df_belf0002["Taux"] = df_belf0002["Taux"].str.replace("%", "").str.strip()
+        df_belf0002["Taux"] = df_belf0002["Taux"].str.replace(",", ".").str.strip()
+        df_belf0002["Taux"] = df_belf0002["Taux"].str.replace(" %", "").str.strip()  # delete % so we can calculate below
+        df_belf0002["Taux"] = ((df_belf0002["Taux"].astype(float) / 100) + (0.5 / 100)) * 100  # multiply values by specific rate of 0.5%
         df_belf0002.insert(0, 'Provider', 'Belfius')
         df_belf0002.insert(1, 'Product_ID', 'BELF0002')
         df_belf0002.insert(2, 'Category', 'Home Loan')
@@ -568,7 +590,9 @@ def belfius():
         df_belf0003.columns = ["Formules", "Min", "Max", "Taux"]
         df_belf0003["Min"] = df_belf0003["Min"].str.replace(" mois", "").str.strip()  # delete "Mois" in Min and Max
         df_belf0003["Max"] = df_belf0003["Max"].str.replace(" mois", "").str.strip()
-        df_belf0003["Taux"] = df_belf0003["Taux"].str.replace("%", "").str.strip()
+        df_belf0003["Taux"] = df_belf0003["Taux"].str.replace(",", ".").str.strip()
+        df_belf0003["Taux"] = df_belf0003["Taux"].str.replace(" %", "").str.strip()  # delete % so we can calculate below
+        df_belf0003["Taux"] = ((df_belf0003["Taux"].astype(float) / 100) + (0.5 / 100)) * 100  # multiply values by specific rate of 0.5%
         df_belf0003.insert(0, 'Provider', 'Belfius')
         df_belf0003.insert(1, 'Product_ID', 'BELF0003')
         df_belf0003.insert(2, 'Category', 'Home Loan')
@@ -584,7 +608,9 @@ def belfius():
         df_belf0004.columns = ["Formules", "Min", "Max", "Taux"]
         df_belf0004["Min"] = df_belf0004["Min"].str.replace(" mois", "").str.strip()  # delete "Mois" in Min and Max
         df_belf0004["Max"] = df_belf0004["Max"].str.replace(" mois", "").str.strip()
-        df_belf0004["Taux"] = df_belf0004["Taux"].str.replace("%", "").str.strip()
+        df_belf0004["Taux"] = df_belf0004["Taux"].str.replace(",", ".").str.strip()
+        df_belf0004["Taux"] = df_belf0004["Taux"].str.replace(" %", "").str.strip()  # delete % so we can calculate below
+        df_belf0004["Taux"] = ((df_belf0004["Taux"].astype(float) / 100) + (0.5 / 100)) * 100  # multiply values by specific rate of 0.5%
         df_belf0004.insert(0, 'Provider', 'Belfius')
         df_belf0004.insert(1, 'Product_ID', 'BELF0004')
         df_belf0004.insert(2, 'Category', 'Home Loan')
@@ -601,7 +627,9 @@ def belfius():
 
         df_belf0005_1["Min"] = df_belf0005_1["Min"].str.replace(" mois", "").str.strip()  # delete "Mois" in Min and Max
         df_belf0005_1["Max"] = df_belf0005_1["Max"].str.replace(" mois", "").str.strip()
-        df_belf0005_1["Taux"] = df_belf0005_1["Taux"].str.replace("%", "").str.strip()
+        df_belf0005_1["Taux"] = df_belf0005_1["Taux"].str.replace(",", ".").str.strip()
+        df_belf0005_1["Taux"] = df_belf0005_1["Taux"].str.replace(" %", "").str.strip()  # delete % so we can calculate below
+        df_belf0005_1["Taux"] = ((df_belf0005_1["Taux"].astype(float) / 100) + (0.5 / 100)) * 100  # multiply values by specific rate of 0.5%
 
         # This below is for the table on the 2nd page
 
@@ -614,7 +642,9 @@ def belfius():
 
         df_belf0005_2["Min"] = df_belf0005_2["Min"].str.replace(" mois", "").str.strip()  # delete "Mois" in Min and Max
         df_belf0005_2["Max"] = df_belf0005_2["Max"].str.replace(" mois", "").str.strip()
-        df_belf0005_2["Taux"] = df_belf0005_2["Taux"].str.replace("%", "").str.strip()
+        df_belf0005_2["Taux"] = df_belf0005_2["Taux"].str.replace(",", ".").str.strip()
+        df_belf0005_2["Taux"] = df_belf0005_2["Taux"].str.replace(" %", "").str.strip()  # delete % so we can calculate below
+        df_belf0005_2["Taux"] = ((df_belf0005_2["Taux"].astype(float) / 100) + (0.5 / 100)) * 100  # multiply values by specific rate of 0.5%
 
         df_belf0005 = pd.concat([df_belf0005_1, df_belf0005_2])
 
@@ -633,9 +663,13 @@ def belfius():
         df_belf0006.drop(df_belf0006.columns[1:3], axis=1, inplace=True)  # drop the CAP columns
         df_belf0006.drop(df_belf0006.columns[3], axis=1, inplace=True)  # drop the column Taux Mensuel
         df_belf0006.columns = ["Formules", "Min", "Max", "Taux"]
+
         df_belf0006["Min"] = df_belf0006["Min"].str.replace(" mois", "").str.strip()  # delete "Mois" in Min and Max
         df_belf0006["Max"] = df_belf0006["Max"].str.replace(" mois", "").str.strip()
-        df_belf0006["Taux"] = df_belf0006["Taux"].str.replace("%", "").str.strip()
+        df_belf0006["Taux"] = df_belf0006["Taux"].str.replace(",", ".").str.strip()
+        df_belf0006["Taux"] = df_belf0006["Taux"].str.replace(" %", "").str.strip()  # delete % so we can calculate below
+        df_belf0006["Taux"] = ((df_belf0006["Taux"].astype(float) / 100) + (0.5 / 100)) * 100  # multiply values by specific rate of 0.5%
+
         df_belf0006.insert(0, 'Provider', 'Belfius')
         df_belf0006.insert(1, 'Product_ID', 'BELF0006')
         df_belf0006.insert(2, 'Category', 'Home Loan')
@@ -649,13 +683,80 @@ def belfius():
         df_belf0007.drop(df_belf0007.columns[1:3], axis=1, inplace=True)  # drop the CAP columns
         df_belf0007.drop(df_belf0007.columns[3], axis=1, inplace=True)  # drop the column Taux Mensuel
         df_belf0007.columns = ["Formules", "Min", "Max", "Taux"]
+
         df_belf0007["Min"] = df_belf0007["Min"].str.replace(" mois", "").str.strip()  # delete "Mois" in Min and Max
         df_belf0007["Max"] = df_belf0007["Max"].str.replace(" mois", "").str.strip()
-        df_belf0007["Taux"] = df_belf0007["Taux"].str.replace("%", "").str.strip()
+        df_belf0007["Taux"] = df_belf0007["Taux"].str.replace(",", ".").str.strip()
+        df_belf0007["Taux"] = df_belf0007["Taux"].str.replace(" %", "").str.strip()  # delete % so we can calculate below
+        df_belf0007["Taux"] = ((df_belf0007["Taux"].astype(float) / 100) + (0.5 / 100)) * 100  # multiply values by specific rate of 0.5%
+
         df_belf0007.insert(0, 'Provider', 'Belfius')
         df_belf0007.insert(1, 'Product_ID', 'BELF0007')
         df_belf0007.insert(2, 'Category', 'Home Loan')
         df_belf0007 = df_belf0007[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+
+        ###############################################################################################################
+        ############################################BELF0008###########################################################
+
+        df_belf0008 = read_pdf('https://www.belfius.be/imagingservlet/GetDocument?src=mifid&id=TARIFLOANFIDELITY_FR', encoding='ISO-8859-1',
+                               pages=2, stream=True, spreadsheet=True, pandas_options={'header': None})
+        df_belf0008 = df_belf0008.loc[[6]]  # use this to parse one line
+        df_belf0008.drop(df_belf0008.columns[1:3], axis=1, inplace=True)  # drop the CAP columns
+        df_belf0008.drop(df_belf0008.columns[3], axis=1, inplace=True)  # drop the column Taux Mensuel
+        df_belf0008.columns = ["Formules", "Min", "Max", "Taux"]
+
+        df_belf0008["Min"] = df_belf0008["Min"].str.replace(" mois", "").str.strip()  # delete "Mois" in Min and Max
+        df_belf0008["Max"] = df_belf0008["Max"].str.replace(" mois", "").str.strip()
+        df_belf0008["Taux"] = df_belf0008["Taux"].str.replace(",", ".").str.strip()
+        df_belf0008["Taux"] = df_belf0008["Taux"].str.replace(" %", "").str.strip()  # delete % so we can calculate below
+        df_belf0008["Taux"] = ((df_belf0008["Taux"].astype(float) / 100) + (0.5 / 100)) * 100  # multiply values by specific rate of 0.5%
+
+        df_belf0008.insert(0, 'Provider', 'Belfius')
+        df_belf0008.insert(1, 'Product_ID', 'BELF0008')
+        df_belf0008.insert(2, 'Category', 'Home Loan')
+        df_belf0008 = df_belf0008[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+
+        ###############################################################################################################
+        ############################################BELF0009###########################################################
+
+        df_belf0009 = read_pdf('https://www.belfius.be/imagingservlet/GetDocument?src=mifid&id=TARIFLOANFIDELITY_FR', encoding='ISO-8859-1',
+                               pages=2, stream=True, spreadsheet=True, pandas_options={'header': None})
+        df_belf0009 = df_belf0009.loc[[7]]  # use this to parse one line
+        df_belf0009.drop(df_belf0009.columns[1:3], axis=1, inplace=True)  # drop the CAP columns
+        df_belf0009.drop(df_belf0009.columns[3], axis=1, inplace=True)  # drop the column Taux Mensuel
+        df_belf0009.columns = ["Formules", "Min", "Max", "Taux"]
+
+        df_belf0009["Min"] = df_belf0009["Min"].str.replace(" mois", "").str.strip()  # delete "Mois" in Min and Max
+        df_belf0009["Max"] = df_belf0009["Max"].str.replace(" mois", "").str.strip()
+        df_belf0009["Taux"] = df_belf0009["Taux"].str.replace(",", ".").str.strip()
+        df_belf0009["Taux"] = df_belf0009["Taux"].str.replace(" %", "").str.strip()  # delete % so we can calculate below
+        df_belf0009["Taux"] = ((df_belf0009["Taux"].astype(float) / 100) + (0.5 / 100)) * 100  # multiply values by specific rate of 0.5%
+
+        df_belf0009.insert(0, 'Provider', 'Belfius')
+        df_belf0009.insert(1, 'Product_ID', 'BELF0009')
+        df_belf0009.insert(2, 'Category', 'Home Loan')
+        df_belf0009 = df_belf0009[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+
+        ###############################################################################################################
+        ############################################BELF0010###########################################################
+
+        df_belf0010 = read_pdf('https://www.belfius.be/imagingservlet/GetDocument?src=mifid&id=TARIFLOANFIDELITY_FR', encoding='ISO-8859-1',
+                               pages=2, stream=True, spreadsheet=True, pandas_options={'header': None})
+        df_belf0010 = df_belf0010.loc[[8]]  # use this to parse one line
+        df_belf0010.drop(df_belf0010.columns[1:3], axis=1, inplace=True)  # drop the CAP columns
+        df_belf0010.drop(df_belf0010.columns[3], axis=1, inplace=True)  # drop the column Taux Mensuel
+        df_belf0010.columns = ["Formules", "Min", "Max", "Taux"]
+
+        df_belf0010["Min"] = df_belf0010["Min"].str.replace(" mois", "").str.strip()  # delete "Mois" in Min and Max
+        df_belf0010["Max"] = df_belf0010["Max"].str.replace(" mois", "").str.strip()
+        df_belf0010["Taux"] = df_belf0010["Taux"].str.replace(",", ".").str.strip()
+        df_belf0010["Taux"] = df_belf0010["Taux"].str.replace(" %", "").str.strip()  # delete % so we can calculate below
+        df_belf0010["Taux"] = ((df_belf0010["Taux"].astype(float) / 100) + (0.5 / 100)) * 100  # multiply values by specific rate of 0.5%
+
+        df_belf0010.insert(0, 'Provider', 'Belfius')
+        df_belf0010.insert(1, 'Product_ID', 'BELF0010')
+        df_belf0010.insert(2, 'Category', 'Home Loan')
+        df_belf0010 = df_belf0010[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
         belf_c = pd.concat([
             pd.concat([df_belf0001], axis=1),
@@ -664,7 +765,11 @@ def belfius():
             pd.concat([df_belf0004], axis=1),
             pd.concat([df_belf0005], axis=1),
             pd.concat([df_belf0006], axis=1),
-            pd.concat([df_belf0007], axis=1)])
+            pd.concat([df_belf0007], axis=1),
+            pd.concat([df_belf0008], axis=1),
+            pd.concat([df_belf0009], axis=1),
+            pd.concat([df_belf0010], axis=1)
+        ])
 
         print(tabulate(belf_c, headers='keys', tablefmt='psql', showindex="never"))
 
@@ -701,7 +806,7 @@ def bnpf():
         df_bnpf0001 = df_bnpf0001.drop(df_bnpf0001.columns[1], axis=1).drop(df_bnpf0001.columns[3], axis=1)
         df_bnpf0001.columns = ["Formules", "Taux"]
         df_bnpf0001["Taux"] = df_bnpf0001["Taux"].str.replace("%", "").str.strip()
-        df_bnpf0001["Formules"] = df_bnpf0001["Formules"].str.replace("Ã©", "é").str.strip()
+        df_bnpf0001["Formules"] = df_bnpf0001["Formules"].str.replace("Ã©", "e").str.strip()
         Min_bnpf0001 = pd.DataFrame({'Min': ['', '', '', '0', '11', '14', '16', '19', '21', '26']})
         Max_bnpf0001 = pd.DataFrame({'Max': ['', '', '', '10', '13', '15', '18', '20', '25', '30']})
         duration_bnpf0001 = Min_bnpf0001.join(Max_bnpf0001)
@@ -721,7 +826,7 @@ def bnpf():
         df_bnpf0002 = df_bnpf0002.drop(df_bnpf0002.columns[0], axis=1)
         df_bnpf0002.columns = ["Taux"]
         df_bnpf0002["Taux"] = df_bnpf0002["Taux"].str.replace("%", "").str.strip()
-        df_bnpf0002["Formules"] = ['1/1 +3/-3 Indice A (durée ≤ 10ans)', '1/1 +3/-3 Indice A (durée > 10ans et ≤ 15ans)', '1/1 +3/-3 Indice A (durée > 15ans et ≤ 20ans)', '1/1 +3/-3 Indice A (durée > 20ans et ≤ 25ans)', '1/1 +3/-3 Indice A (durée > 25ans et ≤ 30ans)']
+        df_bnpf0002["Formules"] = ['1/1 +3/-3 Indice A (duree ≤ 10ans)', '1/1 +3/-3 Indice A (durée > 10ans et ≤ 15ans)', '1/1 +3/-3 Indice A (durée > 15ans et ≤ 20ans)', '1/1 +3/-3 Indice A (durée > 20ans et ≤ 25ans)', '1/1 +3/-3 Indice A (durée > 25ans et ≤ 30ans)']
 
         Min_bnpf0002 = pd.DataFrame({'Min': [''] * 5 + ['0', '11', '16', '21', '26']})
         Max_bnpf0002 = pd.DataFrame({'Max': [''] * 5 + ['10', '15', '20', '25', '30']})
@@ -744,7 +849,7 @@ def bnpf():
         df_bnpf0003.columns = ["_mens_", "Taux"]
         df_bnpf0003.drop('_mens_', axis=1, inplace=True)
         df_bnpf0003["Taux"] = df_bnpf0003["Taux"].str.replace("%", "").str.strip()
-        df_bnpf0003["Formules"] = ['1/1 +3/-3 Indice A mensualité constante (durée initiale 15 ans)']
+        df_bnpf0003["Formules"] = ['1/1 +3/-3 Indice A mensualite constante (duree initiale 15 ans)']
 
         Min_bnpf0003 = pd.DataFrame({'Min': [''] * 10 + ['15']})
         Max_bnpf0003 = pd.DataFrame({'Max': [''] * 10 + ['25']})
@@ -767,7 +872,7 @@ def bnpf():
         df_bnpf0004.columns = ["_mens_", "Taux"]
         df_bnpf0004.drop('_mens_', axis=1, inplace=True)
         df_bnpf0004["Taux"] = df_bnpf0004["Taux"].str.replace("%", "").str.strip()
-        df_bnpf0004["Formules"] = ['1/1 +3/-3 Indice A mensualité constante (durée initiale 20 ans)']
+        df_bnpf0004["Formules"] = ['1/1 +3/-3 Indice A mensualite constante (duree initiale 20 ans)']
 
         Min_bnpf0004 = pd.DataFrame({'Min': [''] * 12 + ['20']})
         Max_bnpf0004 = pd.DataFrame({'Max': [''] * 12 + ['25']})
@@ -790,7 +895,7 @@ def bnpf():
         df_bnpf0005.columns = ["_mens_", "Taux"]
         df_bnpf0005.drop('_mens_', axis=1, inplace=True)
         df_bnpf0005["Taux"] = df_bnpf0005["Taux"].str.replace("%", "").str.strip()
-        df_bnpf0005["Formules"] = ['1/1 +3/-3 Indice A mensualité constante (durée initiale 25 ans)']
+        df_bnpf0005["Formules"] = ['1/1 +3/-3 Indice A mensualite constante (duree initiale 25 ans)']
 
         Min_bnpf0005 = pd.DataFrame({'Min': [''] * 14 + ['20']})
         Max_bnpf0005 = pd.DataFrame({'Max': [''] * 14 + ['25']})
@@ -858,7 +963,7 @@ def bnpf():
         df_bnpf0008 = df_bnpf0008.drop(df_bnpf0008.columns[0], axis=1)
         df_bnpf0008.columns = ["Taux"]
         df_bnpf0008["Taux"] = df_bnpf0008["Taux"].str.replace("%", "").str.strip()
-        df_bnpf0008["Formules"] = ['15/5 +2/-5 indice E  (durée ≤ 25 ans)']
+        df_bnpf0008["Formules"] = ['15/5 +2/-5 indice E  (duree ≤ 25 ans)']
 
         Min_bnpf0008 = pd.DataFrame({'Min': [''] * 18 + ['15']})
         Max_bnpf0008 = pd.DataFrame({'Max': [''] * 18 + ['25']})
@@ -908,102 +1013,194 @@ def cbc():
     ############################################CBC0001###########################################################
     try:
         global cbcx_c
-        df_cbcx0001 = read_pdf('https://www.cbc.be/content/dam/particulieren/f-cbc/product/lenen/Wonen/woonkrediet/Carte%20des%20taux%20des%20Cr%C3%A9dits%20logement.pdf', encoding='ISO-8859-1',
-                               area=[255.16, 987.7, 363.59, 1272.56], pages=1, pandas_options={'header': None})
+        df_cbcx_source = read_pdf('https://www.cbc.be/content/dam/particulieren/f-cbc/product/lenen/Wonen/woonkrediet/Carte%20des%20taux%20des%20Cr%C3%A9dits%20logement.pdf', encoding='ISO-8859-1',
+                                  area=[255.16, 987.7, 363.59, 1272.56], pages=1, pandas_options={'header': None})
 
-        df_cbcx0001 = df_cbcx0001.drop(df_cbcx0001.index[0:3])
+        ## Taking rates for >25000
+        df_cbcx0001 = df_cbcx_source.drop(df_cbcx_source.index[0:3])
         df_cbcx0001 = df_cbcx0001.drop(df_cbcx0001.columns[2:4], axis=1)
         df_cbcx0001.columns = ["Formules", "_Taux_"]
         df_cbcx0001['Taux'], df_cbcx0001['_Maandelijks_'] = df_cbcx0001['_Taux_'].str.split(' % ', 1).str  # split the element within a table
         df_cbcx0001 = df_cbcx0001.drop(df_cbcx0001.columns[1], axis=1).drop(df_cbcx0001.columns[3], axis=1)  # drop the unintended columns
         df_cbcx0001["Formules"] = "Taux fixe de >25000 pour  " + df_cbcx0001["Formules"].astype(str)  # add prefix to str value in df
 
-        Min_cbcx0001 = pd.DataFrame({'Min': [''] * 3 + ['0', '6', '11', '16', '21']})
-        Max_cbcx0001 = pd.DataFrame({'Max': [''] * 3 + ['5', '10', '15', '20', '25']})
+        df_cbcx0001["Taux"] = df_cbcx0001["Taux"].str.replace(",", ".").str.strip()
+        df_cbcx0001["Taux"] = df_cbcx0001["Taux"].astype(float) + 1  # add values by specific rate of 1
+
+        ## Taking rates for <25000
+
+        df_cbcx0001_2 = df_cbcx_source.drop(df_cbcx_source.index[0:3])
+        df_cbcx0001_2 = df_cbcx0001_2.drop(df_cbcx0001_2.columns[2:4], axis=1)
+        df_cbcx0001_2.columns = ["Formules", "_Taux_"]
+        df_cbcx0001_2['Taux'], df_cbcx0001_2['_Maandelijks_'] = df_cbcx0001_2['_Taux_'].str.split(' % ', 1).str  # split the element within a table
+        df_cbcx0001_2 = df_cbcx0001_2.drop(df_cbcx0001_2.columns[1], axis=1).drop(df_cbcx0001_2.columns[3], axis=1)  # drop the unintended columns
+        df_cbcx0001_2["Formules"] = "Taux fixe de < 25000 pour  " + df_cbcx0001_2["Formules"].astype(str)  # add prefix to str value in df
+
+        df_cbcx0001_2["Taux"] = df_cbcx0001_2["Taux"].str.replace(",", ".").str.strip()
+        df_cbcx0001_2["Taux"] = (((df_cbcx0001_2["Taux"].astype(float) + 1) / 100) + (0.25 / 100)) * 100  # add values by specific rate of 1
+
+        # Concatenate rates for >25000 and <25000
+        df_cbcx0001.columns = df_cbcx0001_2.columns
+        data_cbcx0001 = pd.concat([df_cbcx0001, df_cbcx0001_2])
+
+        Min_cbcx0001 = pd.DataFrame({'Min': [''] * 3 + ['1', '6', '11', '16', '21'] * 2})
+        Max_cbcx0001 = pd.DataFrame({'Max': [''] * 3 + ['5', '10', '15', '20', '25'] * 2})
         duration_cbcx0001 = Min_cbcx0001.join(Max_cbcx0001)
 
-        df_cbcx0001.insert(0, 'Provider', 'CBC')
-        df_cbcx0001.insert(1, 'Product_ID', 'CBC0001')
-        df_cbcx0001.insert(2, 'Category', 'Home Loan')
-        df_cbcx0001 = df_cbcx0001.join(duration_cbcx0001)  # join newly made df with existed df
-        df_cbcx0001 = df_cbcx0001[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+        data_cbcx0001.insert(0, 'Provider', 'CBC')
+        data_cbcx0001.insert(1, 'Product_ID', 'CBC0001')
+        data_cbcx0001.insert(2, 'Category', 'Home Loan')
+        data_cbcx0001 = data_cbcx0001.join(duration_cbcx0001)  # join newly made df with existed df
+
+        data_cbcx0001 = data_cbcx0001[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
     ###############################################################################################################
     ############################################CBC0002###########################################################
-        df_cbcx0002 = read_pdf('https://www.cbc.be/content/dam/particulieren/f-cbc/product/lenen/Wonen/woonkrediet/Carte%20des%20taux%20des%20Cr%C3%A9dits%20logement.pdf', encoding='ISO-8859-1',
-                               area=[254.92, 58.95, 379.51, 183.54], pages=1, pandas_options={'header': None})
+        df_cbcx0002_source = read_pdf('https://www.cbc.be/content/dam/particulieren/f-cbc/product/lenen/Wonen/woonkrediet/Carte%20des%20taux%20des%20Cr%C3%A9dits%20logement.pdf', encoding='ISO-8859-1',
+                                      area=[254.92, 58.95, 379.51, 183.54], pages=1, pandas_options={'header': None})
 
-        df_cbcx0002 = df_cbcx0002.drop(df_cbcx0002.index[0:5])
+        ## Taking rates for >25000
+        df_cbcx0002 = df_cbcx0002_source.drop(df_cbcx0002_source.index[0:5])
         df_cbcx0002 = df_cbcx0002.drop(df_cbcx0002.columns[2:4], axis=1)
         df_cbcx0002.columns = ["Formules", "Taux"]
         df_cbcx0002["Formules"] = df_cbcx0002["Formules"].str.replace(" ans", "ans").str.strip()
         df_cbcx0002["Taux"] = df_cbcx0002["Taux"].str.replace("%", "").str.strip()
-        df_cbcx0002["Formules"] = "Taux 1/1/1 (+3/-3) de >25000 pour  " + df_cbcx0002["Formules"].astype(str)  # add prefix to str value in df
+        df_cbcx0002["Formules"] = "Taux 1/1/1 (+3/-3) de > 25000 pour  " + df_cbcx0002["Formules"].astype(str)  # add prefix to str value in df
 
-        Min_cbcx0002 = pd.DataFrame({'Min': [''] * 5 + ['1', '6', '11', '16', '21']})
-        Max_cbcx0002 = pd.DataFrame({'Max': [''] * 5 + ['5', '10', '15', '20', '25']})
+        df_cbcx0002["Taux"] = df_cbcx0002["Taux"].str.replace(",", ".").str.strip()
+        df_cbcx0002["Taux"] = df_cbcx0002["Taux"].astype(float) + 1  # add values by specific rate of 1
+
+        # Taking rates for <25000
+        df_cbcx0002_2 = df_cbcx0002_source.drop(df_cbcx0002_source.index[0:5])
+        df_cbcx0002_2 = df_cbcx0002_2.drop(df_cbcx0002_2.columns[2:4], axis=1)
+        df_cbcx0002_2.columns = ["Formules", "Taux"]
+        df_cbcx0002_2["Formules"] = df_cbcx0002_2["Formules"].str.replace(" ans", "ans").str.strip()
+        df_cbcx0002_2["Taux"] = df_cbcx0002_2["Taux"].str.replace("%", "").str.strip()
+        df_cbcx0002_2["Formules"] = "Taux 1/1/1 (+3/-3) de < 25000 pour  " + df_cbcx0002_2["Formules"].astype(str)  # add prefix to str value in df
+
+        df_cbcx0002_2["Taux"] = df_cbcx0002_2["Taux"].str.replace(",", ".").str.strip()
+        df_cbcx0002_2["Taux"] = (((df_cbcx0002_2["Taux"].astype(float) + 1) / 100) + (0.25 / 100)) * 100  # add values by specific rate of 1+0.25%
+
+        # Concatenate rates for >25000 and <25000
+        df_cbcx0002.columns = df_cbcx0002_2.columns
+        data_cbcx0002 = pd.concat([df_cbcx0002, df_cbcx0002_2])
+
+        Min_cbcx0002 = pd.DataFrame({'Min': [''] * 5 + ['0', '11', '16', '21'] * 2})
+        Max_cbcx0002 = pd.DataFrame({'Max': [''] * 5 + ['10', '15', '20', '25'] * 2})
         duration_cbcx0002 = Min_cbcx0002.join(Max_cbcx0002)
 
-        df_cbcx0002.insert(0, 'Provider', 'CBC')
-        df_cbcx0002.insert(1, 'Product_ID', 'CBC0002')
-        df_cbcx0002.insert(2, 'Category', 'Home Loan')
-        df_cbcx0002 = df_cbcx0002.join(duration_cbcx0002)  # join newly made df with existed df
-        df_cbcx0002 = df_cbcx0002[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
-
+        data_cbcx0002.insert(0, 'Provider', 'CBC')
+        data_cbcx0002.insert(1, 'Product_ID', 'CBC0002')
+        data_cbcx0002.insert(2, 'Category', 'Home Loan')
+        data_cbcx0002 = data_cbcx0002.join(duration_cbcx0002)  # join newly made df with existed df
+        data_cbcx0002 = data_cbcx0002[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
     ###############################################################################################################
     ############################################CBC0003###########################################################
-        df_cbcx0003 = read_pdf('https://www.cbc.be/content/dam/particulieren/f-cbc/product/lenen/Wonen/woonkrediet/Carte%20des%20taux%20des%20Cr%C3%A9dits%20logement.pdf', encoding='ISO-8859-1',
-                               area=[255.11, 386.76, 375.07, 504.13], pages=1, pandas_options={'header': None})
+        df_cbcx0003_source = read_pdf('https://www.cbc.be/content/dam/particulieren/f-cbc/product/lenen/Wonen/woonkrediet/Carte%20des%20taux%20des%20Cr%C3%A9dits%20logement.pdf', encoding='ISO-8859-1',
+                                      area=[255.11, 386.76, 375.07, 504.13], pages=1, pandas_options={'header': None})
 
-        df_cbcx0003 = df_cbcx0003.drop(df_cbcx0003.index[0:5])
+        ## Taking rates for >25000
+        df_cbcx0003 = df_cbcx0003_source.drop(df_cbcx0003_source.index[0:5])
         df_cbcx0003 = df_cbcx0003.drop(df_cbcx0003.columns[1:3], axis=1)
         df_cbcx0003.columns = ["_Formules_"]
         df_cbcx0003["_Formules_"] = df_cbcx0003["_Formules_"].str.replace(" ans", "ans").str.strip()
-        df_cbcx0003["_Formules_"] = df_cbcx0003["_Formules_"].str.replace(" %", "%").str.strip()
+        df_cbcx0003["_Formules_"] = df_cbcx0003["_Formules_"].str.replace(" %", "").str.strip()
+        df_cbcx0003["_Formules_"] = df_cbcx0003["_Formules_"].str.replace(",", ".").str.strip()
         df_cbcx0003['Formules'], df_cbcx0003['Taux'] = df_cbcx0003['_Formules_'].str.split(' ', 1).str
         df_cbcx0003['Taux'], df_cbcx0003['_Maandelijks_'] = df_cbcx0003['Taux'].str.split(' ', 1).str
         df_cbcx0003.drop('_Formules_', axis=1, inplace=True)
         df_cbcx0003.drop('_Maandelijks_', axis=1, inplace=True)
-        df_cbcx0003["Formules"] = "Taux 3/3/3 (+2/onbeperkt) de >25000 pour  " + df_cbcx0003["Formules"].astype(str)  # add prefix to str value in df
+        df_cbcx0003["Formules"] = "Taux 3/3/3 (+2/onbeperkt) de > 25000 pour  " + df_cbcx0003["Formules"].astype(str)  # add prefix to str value in df
+
+        df_cbcx0003["Taux"] = df_cbcx0003["Taux"].str.replace(",", ".").str.strip()
+        df_cbcx0003["Taux"] = df_cbcx0003["Taux"].astype(float) + 1  # add values by specific rate of 1
+
+        ## Taking rates for >25000
+        df_cbcx0003_2 = df_cbcx0003_source.drop(df_cbcx0003_source.index[0:5])
+        df_cbcx0003_2 = df_cbcx0003_2.drop(df_cbcx0003_2.columns[1:3], axis=1)
+        df_cbcx0003_2.columns = ["_Formules_"]
+        df_cbcx0003_2["_Formules_"] = df_cbcx0003_2["_Formules_"].str.replace(" ans", "ans").str.strip()
+        df_cbcx0003_2["_Formules_"] = df_cbcx0003_2["_Formules_"].str.replace(" %", "").str.strip()
+        df_cbcx0003_2["_Formules_"] = df_cbcx0003_2["_Formules_"].str.replace(",", ".").str.strip()
+        df_cbcx0003_2['Formules'], df_cbcx0003_2['Taux'] = df_cbcx0003_2['_Formules_'].str.split(' ', 1).str
+        df_cbcx0003_2['Taux'], df_cbcx0003_2['_Maandelijks_'] = df_cbcx0003_2['Taux'].str.split(' ', 1).str
+        df_cbcx0003_2.drop('_Formules_', axis=1, inplace=True)
+        df_cbcx0003_2.drop('_Maandelijks_', axis=1, inplace=True)
+        df_cbcx0003_2["Formules"] = "Taux 3/3/3 (+2/onbeperkt) de < 25000 pour  " + df_cbcx0003_2["Formules"].astype(str)  # add prefix to str value in df
+
+        df_cbcx0003_2["Taux"] = df_cbcx0003_2["Taux"].str.replace(",", ".").str.strip()
+        df_cbcx0003_2["Taux"] = (((df_cbcx0003_2["Taux"].astype(float) + 1) / 100) + (0.25 / 100)) * 100  # add values by specific rate of 1+0.25%
+
+        # Concatenate rates for >25000 and <25000
+        df_cbcx0003.columns = df_cbcx0003_2.columns
+        data_cbcx0003 = pd.concat([df_cbcx0003, df_cbcx0003_2])
+
         Min_cbcx0003 = pd.DataFrame({'Min': [''] * 5 + ['0', '11', '16', '21']})
         Max_cbcx0003 = pd.DataFrame({'Max': [''] * 5 + ['10', '15', '20', '25']})
         duration_cbcx0003 = Min_cbcx0003.join(Max_cbcx0003)
-        df_cbcx0003.insert(0, 'Provider', 'CBC')
-        df_cbcx0003.insert(1, 'Product_ID', 'CBC0003')
-        df_cbcx0003.insert(2, 'Category', 'Home Loan')
-        df_cbcx0003 = df_cbcx0003.join(duration_cbcx0003)  # join newly made df with existed df
-        df_cbcx0003 = df_cbcx0003[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
-    ###############################################################################################################
+        data_cbcx0003.insert(0, 'Provider', 'CBC')
+        data_cbcx0003.insert(1, 'Product_ID', 'CBC0003')
+        data_cbcx0003.insert(2, 'Category', 'Home Loan')
+        data_cbcx0003 = data_cbcx0003.join(duration_cbcx0003)  # join newly made df with existed df
+        data_cbcx0003 = data_cbcx0003[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+
+        ###############################################################################################################
     ############################################CBC0004###########################################################
-        df_cbcx0004 = read_pdf('https://www.cbc.be/content/dam/particulieren/f-cbc/product/lenen/Wonen/woonkrediet/Carte%20des%20taux%20des%20Cr%C3%A9dits%20logement.pdf', encoding='ISO-8859-1',
-                               area=[256.03, 686.36, 376.26, 967.97], pages=1, pandas_options={'header': None})
+        df_cbcx0004_source = read_pdf('https://www.cbc.be/content/dam/particulieren/f-cbc/product/lenen/Wonen/woonkrediet/Carte%20des%20taux%20des%20Cr%C3%A9dits%20logement.pdf', encoding='ISO-8859-1',
+                                      area=[256.03, 686.36, 376.26, 967.97], pages=1, pandas_options={'header': None})
 
-        df_cbcx0004 = df_cbcx0004.drop(df_cbcx0004.index[0:5])
+        ## Taking rates for >25000
+        df_cbcx0004 = df_cbcx0004_source.drop(df_cbcx0004_source.index[0:5])
         df_cbcx0004 = df_cbcx0004.drop(df_cbcx0004.columns[1:3], axis=1)
         df_cbcx0004.columns = ["_Formules_"]
         df_cbcx0004["_Formules_"] = df_cbcx0004["_Formules_"].str.replace(" ans", "ans").str.strip()
-        df_cbcx0004["_Formules_"] = df_cbcx0004["_Formules_"].str.replace(" %", "%").str.strip()
+        df_cbcx0004["_Formules_"] = df_cbcx0004["_Formules_"].str.replace(" %", "").str.strip()
         df_cbcx0004['Formules'], df_cbcx0004['Taux'] = df_cbcx0004['_Formules_'].str.split(' ', 1).str
         df_cbcx0004['Taux'], df_cbcx0004['_Maandelijks_'] = df_cbcx0004['Taux'].str.split(' ', 1).str
         df_cbcx0004.drop('_Formules_', axis=1, inplace=True)
         df_cbcx0004.drop('_Maandelijks_', axis=1, inplace=True)
-        df_cbcx0004["Formules"] = "Taux 5/5/5 (+2/onbeperkt) de >25000 pour  " + df_cbcx0004["Formules"].astype(str)  # add prefix to str value in df
-        Min_cbcx0004 = pd.DataFrame({'Min': [''] * 5 + ['0', '11', '16', '21']})
-        Max_cbcx0004 = pd.DataFrame({'Max': [''] * 5 + ['10', '15', '20', '25']})
-        duration_cbcx0004 = Min_cbcx0004.join(Max_cbcx0004)
-        df_cbcx0004.insert(0, 'Provider', 'CBC')
-        df_cbcx0004.insert(1, 'Product_ID', 'CBC0004')
-        df_cbcx0004.insert(2, 'Category', 'Home Loan')
-        df_cbcx0004 = df_cbcx0004.join(duration_cbcx0004)  # join newly made df with existed df
-        df_cbcx0004 = df_cbcx0004[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+        df_cbcx0004["Formules"] = "Taux 5/5/5 (+2/onbeperkt) de > 25000 pour  " + df_cbcx0004["Formules"].astype(str)  # add prefix to str value in df
 
+        df_cbcx0004["Taux"] = df_cbcx0004["Taux"].str.replace(",", ".").str.strip()
+        df_cbcx0004["Taux"] = df_cbcx0004["Taux"].astype(float) + 1  # add values by specific rate of 1
+
+        ## Taking rates for >25000
+        df_cbcx0004_2 = df_cbcx0004_source.drop(df_cbcx0004_source.index[0:5])
+        df_cbcx0004_2 = df_cbcx0004_2.drop(df_cbcx0004_2.columns[1:3], axis=1)
+        df_cbcx0004_2.columns = ["_Formules_"]
+        df_cbcx0004_2["_Formules_"] = df_cbcx0004_2["_Formules_"].str.replace(" ans", "ans").str.strip()
+        df_cbcx0004_2["_Formules_"] = df_cbcx0004_2["_Formules_"].str.replace(" %", "").str.strip()
+        df_cbcx0004_2['Formules'], df_cbcx0004_2['Taux'] = df_cbcx0004_2['_Formules_'].str.split(' ', 1).str
+        df_cbcx0004_2['Taux'], df_cbcx0004_2['_Maandelijks_'] = df_cbcx0004_2['Taux'].str.split(' ', 1).str
+        df_cbcx0004_2.drop('_Formules_', axis=1, inplace=True)
+        df_cbcx0004_2.drop('_Maandelijks_', axis=1, inplace=True)
+        df_cbcx0004_2["Formules"] = "Taux 5/5/5 (+2/onbeperkt) de < 25000 pour  " + df_cbcx0004_2["Formules"].astype(str)  # add prefix to str value in df
+
+        df_cbcx0004_2["Taux"] = df_cbcx0004_2["Taux"].str.replace(",", ".").str.strip()
+        df_cbcx0004_2["Taux"] = (((df_cbcx0004_2["Taux"].astype(float) + 1) / 100) + (0.25 / 100)) * 100  # add values by specific rate of 1+0.25%
+
+        # Concatenate rates for >25000 and <25000
+        df_cbcx0004.columns = df_cbcx0004_2.columns
+        data_cbcx0004 = pd.concat([df_cbcx0004, df_cbcx0004_2])
+
+        Min_cbcx0004 = pd.DataFrame({'Min': [''] * 5 + ['0', '11', '16', '21'] * 2})
+        Max_cbcx0004 = pd.DataFrame({'Max': [''] * 5 + ['10', '15', '20', '25'] * 2})
+        duration_cbcx0004 = Min_cbcx0004.join(Max_cbcx0004)
+
+        data_cbcx0004.insert(0, 'Provider', 'CBC')
+        data_cbcx0004.insert(1, 'Product_ID', 'CBC0004')
+        data_cbcx0004.insert(2, 'Category', 'Home Loan')
+        data_cbcx0004 = data_cbcx0004.join(duration_cbcx0003)  # join newly made df with existed df
+        data_cbcx0004 = data_cbcx0004[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+
+        ##### concat all dfs
         cbcx_c = pd.concat([
-            pd.concat([df_cbcx0001], axis=1),
-            pd.concat([df_cbcx0002], axis=1),
-            pd.concat([df_cbcx0003], axis=1),
-            pd.concat([df_cbcx0004], axis=1)])
+            pd.concat([data_cbcx0001], axis=1),
+            pd.concat([data_cbcx0002], axis=1),
+            pd.concat([data_cbcx0003], axis=1),
+            pd.concat([data_cbcx0004], axis=1)])
 
         print(tabulate(cbcx_c, headers='keys', tablefmt='psql', showindex="never"))
     except:
@@ -1023,63 +1220,117 @@ def cbc_save():
 # # | \_____| |     | |   | | # #
 # #  \______)_|     |_|   |_| # #
 
-############################################# THE RATE IS NOT PUBLIC AS PER 09/05/2019 ######################################
-############################## Therefore we're not calling it in all() until it's published again ########################
 
 def cph():
+    ##########################The lines below are required to parse directly from the web link######################
+
+    data = requests.get("https://www.cph.be/credits/credits-prives/cph-logement/tarif-logement.html")
+    soup = BeautifulSoup(data.content, "lxml")
+
+    result = soup.findAll('a', attrs={'href': re.compile("^/images/stories/PDF/")})[0].get('href')
+    base = "https://www.cph.be"
+    new_pdf_cphx = base + result
+
     ###############################################################################################################
     ############################################CPHX0001###########################################################
     try:
         global cphx_c
-        df_cphx = read_pdf('https://www.cph.be/images/stories/PDF/tarif_cph_logement_20190301.pdf#view=fitV', encoding='ISO-8859-1',
+        df_cphl = read_pdf(new_pdf_cphx, encoding='ISO-8859-1',
                            pages=1, pandas_options={'header': None})
 
-        df_cphx0001 = df_cphx.drop(df_cphx.index[0]).drop(df_cphx.index[9:34])
-        df_cphx0001 = df_cphx0001.dropna(axis='columns')
-        df_cphx0001.drop(df_cphx0001.columns[2:6], axis=1, inplace=True)
+        ##take rate of 0-2 years
+        df_cphx0001_1 = df_cphl.drop(df_cphl.index[1:29])
+        df_cphx0001_1.drop(df_cphx0001_1.columns[2:5], axis=1, inplace=True)
+        df_cphx0001_1.columns = ["Formules", "Taux"]
+        df_cphx0001_1["Taux"] = df_cphx0001_1["Taux"].str.replace("%", "").str.strip()
+        df_cphx0001_1["Taux"] = df_cphx0001_1["Taux"].str.replace(",", ".").str.strip()
+
+        df_cphx0001_1["Taux"] = ((df_cphx0001_1["Taux"].astype(float) / 100) + (0.5 / 100)) * 100  # multiply values by specific rate of 0.5%
+
+        Min_df_cphx0001_1 = pd.DataFrame({'Min': ['0']})
+        Max_df_cphx0001_1 = pd.DataFrame({'Max': ['2']})
+
+        duration_cphx0001_1 = Min_df_cphx0001_1.join(Max_df_cphx0001_1)
+        df_cphx0001_1 = df_cphx0001_1.join(duration_cphx0001_1)
+
+        ## take rates of the rest
+        df_cphx0001 = df_cphl.drop(df_cphl.index[0]).drop(df_cphl.index[8:29])
+        df_cphx0001.drop(df_cphx0001.columns[2:5], axis=1, inplace=True)
         df_cphx0001.columns = ["Formules", "Taux"]
         df_cphx0001["Taux"] = df_cphx0001["Taux"].str.replace("%", "").str.strip()
+        df_cphx0001["Taux"] = df_cphx0001["Taux"].str.replace(",", ".").str.strip()
 
-        Min_cphx0001 = pd.DataFrame({'Min': ['0', '0', '3', '4', '6', '11', '16', '21', '26']})
-        Max_cphx0001 = pd.DataFrame({'Max': ['0', '2', '3', '5', '10', '15', '20', '25', '30']})
+        Min_cphx0001 = pd.DataFrame({'Min': ['', '3', '4', '6', '11', '16', '21', '26']})
+        Max_cphx0001 = pd.DataFrame({'Max': ['', '3', '5', '10', '15', '20', '25', '30']})
+
         duration_cphx0001 = Min_cphx0001.join(Max_cphx0001)
+        df_cphx0001 = df_cphx0001.join(duration_cphx0001)
 
-        df_cphx0001.insert(0, 'Provider', 'CPH')
-        df_cphx0001.insert(1, 'Product_ID', 'CPHX0001')
-        df_cphx0001.insert(2, 'Category', 'Home Loan')
-        df_cphx0001 = df_cphx0001.join(duration_cphx0001)  # join newly made df with existed df
-        df_cphx0001 = df_cphx0001[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+        # Concatenate rates for 0-2 years and rest of the years
+        df_cphx0001.columns = df_cphx0001_1.columns
+        data_cphx0001 = pd.concat([df_cphx0001_1, df_cphx0001])
 
-    ###############################################################################################################
+        data_cphx0001.insert(0, 'Provider', 'CPH')
+        data_cphx0001.insert(1, 'Product_ID', 'CPHX0001')
+        data_cphx0001.insert(2, 'Category', 'Home Loan')
+        data_cphx0001 = data_cphx0001[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+
+        ###############################################################################################################
     ############################################CPHX0002###########################################################
-        df_cphx = read_pdf('https://www.cph.be/images/stories/PDF/tarif_cph_logement_20190301.pdf#view=fitV', encoding='ISO-8859-1',
-                           pages=1, pandas_options={'header': None})
-        df_cphx0002 = df_cphx.drop(df_cphx.index[0:10]).drop(df_cphx.index[11:34])
+        ###take rate of 1-2 years
+        df_cphx0002_1 = df_cphl.drop(df_cphl.index[0:8]).drop(df_cphl.index[9:34])
+        df_cphx0002_1 = df_cphx0002_1.dropna(axis='columns')
+        df_cphx0002_1.drop(df_cphx0002_1.columns[2:5], axis=1, inplace=True)
+        df_cphx0002_1.columns = ["Formules", "Taux"]
+        df_cphx0002_1["Taux"] = df_cphx0002_1["Taux"].str.replace("%", "").str.strip()
+        df_cphx0002_1["Taux"] = df_cphx0002_1["Taux"].str.replace(",", ".").str.strip()
+        df_cphx0002_1["Formules"] = df_cphx0002_1["Formules"].str.replace("Ã©", "e").str.strip()
+
+        df_cphx0002_1["Taux"] = ((df_cphx0002_1["Taux"].astype(float) / 100) + (0.5 / 100)) * 100  # multiply values by specific rate of 0.5%
+
+        Min_cphx0002_1 = pd.DataFrame({'Min': [''] * 8 + ['1']})
+        Max_cphx0002_1 = pd.DataFrame({'Max': [''] * 8 + ['2']})
+        duration_cphx0002_1 = Min_cphx0002_1.join(Max_cphx0002_1)
+
+        df_cphx0002_1 = df_cphx0002_1.join(duration_cphx0002_1)
+
+        ###take rate of 3-30 years
+
+        df_cphx0002 = df_cphl.drop(df_cphl.index[0:8]).drop(df_cphl.index[9:34])
         df_cphx0002 = df_cphx0002.dropna(axis='columns')
         df_cphx0002.drop(df_cphx0002.columns[2:5], axis=1, inplace=True)
         df_cphx0002.columns = ["Formules", "Taux"]
         df_cphx0002["Taux"] = df_cphx0002["Taux"].str.replace("%", "").str.strip()
-        df_cphx0002["Formules"] = df_cphx0002["Formules"].str.replace("Ã©", "é").str.strip()
+        df_cphx0002["Taux"] = df_cphx0002["Taux"].str.replace(",", ".").str.strip()
+        df_cphx0002["Formules"] = df_cphx0002["Formules"].str.replace("Ã©", "e").str.strip()
 
-        df_cphx0002.insert(0, 'Provider', 'CPH')
-        df_cphx0002.insert(1, 'Product_ID', 'CPHX0002')
-        df_cphx0002.insert(2, 'Category', 'Home Loan')
-        df_cphx0002.insert(3, 'Min', '')
-        df_cphx0002.insert(4, 'Max', '')
+        Min_cphx0002 = pd.DataFrame({'Min': [''] * 8 + ['3']})
+        Max_cphx0002 = pd.DataFrame({'Max': [''] * 8 + ['30']})
+        duration_cphx0002 = Min_cphx0002.join(Max_cphx0002)
 
-        df_cphx0002 = df_cphx0002[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+        df_cphx0002 = df_cphx0002.join(duration_cphx0002)
 
-    ###############################################################################################################
+        # Concatenate rates for 0-2 years and rest of the years
+        df_cphx0002.columns = df_cphx0002_1.columns
+        data_cphx0002 = pd.concat([df_cphx0002_1, df_cphx0002])
+
+        data_cphx0002.insert(0, 'Provider', 'CPH')
+        data_cphx0002.insert(1, 'Product_ID', 'CPHX0002')
+        data_cphx0002.insert(2, 'Category', 'Home Loan')
+
+        data_cphx0002 = data_cphx0002[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+
+        ###############################################################################################################
     ############################################CPHX0003###########################################################
-        df_cphx = read_pdf('https://www.cph.be/images/stories/PDF/tarif_cph_logement_20190301.pdf#view=fitV', encoding='ISO-8859-1',
+        df_cphl = read_pdf(new_pdf_cphx, encoding='ISO-8859-1',
                            pages=1, pandas_options={'header': None})
 
-        df_cphx0003 = df_cphx.drop(df_cphx.index[0:11]).drop(df_cphx.index[12:34])
+        df_cphx0003 = df_cphl.drop(df_cphl.index[0:9]).drop(df_cphl.index[10:34])
         df_cphx0003 = df_cphx0003.dropna(axis='columns')
         df_cphx0003.drop(df_cphx0003.columns[2:5], axis=1, inplace=True)
         df_cphx0003.columns = ["Formules", "Taux"]
         df_cphx0003["Taux"] = df_cphx0003["Taux"].str.replace("%", "").str.strip()
-        df_cphx0003["Formules"] = df_cphx0003["Formules"].str.replace("Ã©", "é").str.strip()
+        df_cphx0003["Formules"] = df_cphx0003["Formules"].str.replace("Ã©", "e").str.strip()
 
         df_cphx0003.insert(0, 'Provider', 'CPH')
         df_cphx0003.insert(1, 'Product_ID', 'CPHX0003')
@@ -1091,15 +1342,15 @@ def cph():
 
     ###############################################################################################################
     ############################################CPHX0004###########################################################
-        df_cphx = read_pdf('https://www.cph.be/images/stories/PDF/tarif_cph_logement_20190301.pdf#view=fitV', encoding='ISO-8859-1',
+        df_cphl = read_pdf(new_pdf_cphx, encoding='ISO-8859-1',
                            pages=1, pandas_options={'header': None})
 
-        df_cphx0004 = df_cphx.drop(df_cphx.index[0:12]).drop(df_cphx.index[13:34])
+        df_cphx0004 = df_cphl.drop(df_cphl.index[0:10]).drop(df_cphl.index[11:34])
         df_cphx0004 = df_cphx0004.dropna(axis='columns')
         df_cphx0004.drop(df_cphx0004.columns[2:5], axis=1, inplace=True)
         df_cphx0004.columns = ["Formules", "Taux"]
         df_cphx0004["Taux"] = df_cphx0004["Taux"].str.replace("%", "").str.strip()
-        df_cphx0004["Formules"] = df_cphx0004["Formules"].str.replace("Ã©", "é").str.strip()
+        df_cphx0004["Formules"] = df_cphx0004["Formules"].str.replace("Ã©", "e").str.strip()
 
         df_cphx0004.insert(0, 'Provider', 'CPH')
         df_cphx0004.insert(1, 'Product_ID', 'CPHX0004')
@@ -1114,12 +1365,12 @@ def cph():
         df_cphx = read_pdf('https://www.cph.be/images/stories/PDF/tarif_cph_logement_20190301.pdf#view=fitV', encoding='ISO-8859-1',
                            pages=1, pandas_options={'header': None})
 
-        df_cphx0005 = df_cphx.drop(df_cphx.index[0:13]).drop(df_cphx.index[14:34])
+        df_cphx0005 = df_cphx.drop(df_cphx.index[0:11]).drop(df_cphx.index[12:34])
         df_cphx0005 = df_cphx0005.dropna(axis='columns')
         df_cphx0005.drop(df_cphx0005.columns[2:5], axis=1, inplace=True)
         df_cphx0005.columns = ["Formules", "Taux"]
         df_cphx0005["Taux"] = df_cphx0005["Taux"].str.replace("%", "").str.strip()
-        df_cphx0005["Formules"] = df_cphx0005["Formules"].str.replace("Ã©", "é").str.strip()
+        df_cphx0005["Formules"] = df_cphx0005["Formules"].str.replace("Ã©", "e").str.strip()
 
         df_cphx0005.insert(0, 'Provider', 'CPH')
         df_cphx0005.insert(1, 'Product_ID', 'CPHX0005')
@@ -1134,12 +1385,12 @@ def cph():
         df_cphx = read_pdf('https://www.cph.be/images/stories/PDF/tarif_cph_logement_20190301.pdf#view=fitV', encoding='ISO-8859-1',
                            pages=1, pandas_options={'header': None})
 
-        df_cphx0006 = df_cphx.drop(df_cphx.index[0:14]).drop(df_cphx.index[15:34])
+        df_cphx0006 = df_cphx.drop(df_cphx.index[0:12]).drop(df_cphx.index[13:34])
         df_cphx0006 = df_cphx0006.dropna(axis='columns')
         df_cphx0006.drop(df_cphx0006.columns[2:5], axis=1, inplace=True)
         df_cphx0006.columns = ["Formules", "Taux"]
         df_cphx0006["Taux"] = df_cphx0006["Taux"].str.replace("%", "").str.strip()
-        df_cphx0006["Formules"] = df_cphx0006["Formules"].str.replace("Ã©", "é").str.strip()
+        df_cphx0006["Formules"] = df_cphx0006["Formules"].str.replace("Ã©", "e").str.strip()
 
         df_cphx0006.insert(0, 'Provider', 'CPH')
         df_cphx0006.insert(1, 'Product_ID', 'CPHX0006')
@@ -1155,12 +1406,12 @@ def cph():
         df_cphx = read_pdf('https://www.cph.be/images/stories/PDF/tarif_cph_logement_20190301.pdf#view=fitV', encoding='ISO-8859-1',
                            pages=1, pandas_options={'header': None})
 
-        df_cphx0007 = df_cphx.drop(df_cphx.index[0:15]).drop(df_cphx.index[16:34])
+        df_cphx0007 = df_cphx.drop(df_cphx.index[0:13]).drop(df_cphx.index[14:34])
         df_cphx0007 = df_cphx0007.dropna(axis='columns')
         df_cphx0007.drop(df_cphx0007.columns[2:5], axis=1, inplace=True)
         df_cphx0007.columns = ["Formules", "Taux"]
         df_cphx0007["Taux"] = df_cphx0007["Taux"].str.replace("%", "").str.strip()
-        df_cphx0007["Formules"] = df_cphx0007["Formules"].str.replace("Ã©", "é").str.strip()
+        df_cphx0007["Formules"] = df_cphx0007["Formules"].str.replace("Ã©", "e").str.strip()
         df_cphx0007.insert(0, 'Provider', 'CPH')
         df_cphx0007.insert(1, 'Product_ID', 'CPHX0007')
         df_cphx0007.insert(2, 'Category', 'Home Loan')
@@ -1174,12 +1425,12 @@ def cph():
         df_cphx = read_pdf('https://www.cph.be/images/stories/PDF/tarif_cph_logement_20190301.pdf#view=fitV', encoding='ISO-8859-1',
                            pages=1, pandas_options={'header': None})
 
-        df_cphx0008 = df_cphx.drop(df_cphx.index[0:16]).drop(df_cphx.index[17:34])
+        df_cphx0008 = df_cphx.drop(df_cphx.index[0:14]).drop(df_cphx.index[15:34])
         df_cphx0008 = df_cphx0008.dropna(axis='columns')
         df_cphx0008.drop(df_cphx0008.columns[2:5], axis=1, inplace=True)
         df_cphx0008.columns = ["Formules", "Taux"]
         df_cphx0008["Taux"] = df_cphx0008["Taux"].str.replace("%", "").str.strip()
-        df_cphx0008["Formules"] = df_cphx0008["Formules"].str.replace("Ã©", "é").str.strip()
+        df_cphx0008["Formules"] = df_cphx0008["Formules"].str.replace("Ã©", "e").str.strip()
         df_cphx0008.insert(0, 'Provider', 'CPH')
         df_cphx0008.insert(1, 'Product_ID', 'CPHX0008')
         df_cphx0008.insert(2, 'Category', 'Home Loan')
@@ -1188,8 +1439,8 @@ def cph():
         df_cphx0008 = df_cphx0008[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
         cphx_c = pd.concat([
-            pd.concat([df_cphx0001], axis=1),
-            pd.concat([df_cphx0002], axis=1),
+            pd.concat([data_cphx0001], axis=1),
+            pd.concat([data_cphx0002], axis=1),
             pd.concat([df_cphx0003], axis=1),
             pd.concat([df_cphx0004], axis=1),
             pd.concat([df_cphx0005], axis=1),
@@ -1239,7 +1490,8 @@ def crelan():
         df_crel0001 = df_crel0001.drop(df_crel0001.columns[0:2], axis=1).drop(df_crel0001.columns[4:7], axis=1)
         df_crel0001.columns = ["Formules", "Taux"]
         df_crel0001["Taux"] = df_crel0001["Taux"].str.replace("%", "").str.strip()
-        df_crel0001["Formules"] = df_crel0001["Formules"].str.replace("â¤", "≤").str.strip()
+        df_crel0001["Taux"] = df_crel0001["Taux"].str.replace(",", ".").str.strip()
+        df_crel0001["Formules"] = "Taux fixe de >12.500 pour " + df_crel0001["Formules"].str.replace("â¤", "≤").str.strip()
 
         Min_crel0001 = pd.DataFrame({'Min': [''] * 37 + ['0', '11', '13', '16', '19', '21', '26']})
         Max_crel0001 = pd.DataFrame({'Max': [''] * 37 + ['10', '12', '15', '18', '20', '25', '30']})
@@ -1260,7 +1512,8 @@ def crelan():
         df_crel0002 = df_crel0002.drop(df_crel0002.columns[0:2], axis=1).drop(df_crel0002.columns[4:7], axis=1)
         df_crel0002.columns = ["Formules", "Taux"]
         df_crel0002["Taux"] = df_crel0002["Taux"].str.replace("%", "").str.strip()
-        df_crel0002["Formules"] = df_crel0002["Formules"].str.replace("â¤", "≤").str.strip()
+        df_crel0002["Taux"] = df_crel0002["Taux"].str.replace(",", ".").str.strip()
+        df_crel0002["Formules"] = "Taux 1/1/1 de >12.500 pour " + df_crel0002["Formules"].str.replace("â¤", "≤").str.strip()
 
         Min_crel0002 = pd.DataFrame({'Min': ['0', '16', '21']})
         Max_crel0002 = pd.DataFrame({'Max': ['15', '20', '25']})
@@ -1282,7 +1535,8 @@ def crelan():
         df_crel0003 = df_crel0003.drop(df_crel0003.columns[0:2], axis=1).drop(df_crel0003.columns[4:7], axis=1)
         df_crel0003.columns = ["Formules", "Taux"]
         df_crel0003["Taux"] = df_crel0003["Taux"].str.replace("%", "").str.strip()
-        df_crel0003["Formules"] = df_crel0003["Formules"].str.replace("â¤", "≤").str.strip()
+        df_crel0003["Taux"] = df_crel0003["Taux"].str.replace(",", ".").str.strip()
+        df_crel0003["Formules"] = "Taux 3/3/3 de >12.500 pour " + df_crel0003["Formules"].str.replace("â¤", "≤").str.strip()
 
         Min_crel0003 = pd.DataFrame({'Min': [''] * 3 + ['0', '16', '21', '26']})
         Max_crel0003 = pd.DataFrame({'Max': [''] * 3 + ['15', '20', '25', '30']})
@@ -1304,7 +1558,8 @@ def crelan():
         df_crel0004 = df_crel0004.drop(df_crel0004.columns[0:2], axis=1).drop(df_crel0004.columns[4:7], axis=1)
         df_crel0004.columns = ["Formules", "Taux"]
         df_crel0004["Taux"] = df_crel0004["Taux"].str.replace("%", "").str.strip()
-        df_crel0004["Formules"] = df_crel0004["Formules"].str.replace("â¤", "≤").str.strip()
+        df_crel0004["Taux"] = df_crel0004["Taux"].str.replace(",", ".").str.strip()
+        df_crel0004["Formules"] = "Taux 5/5/5 de >12.500 pour " + df_crel0004["Formules"].str.replace("â¤", "≤").str.strip()
 
         Min_crel0004 = pd.DataFrame({'Min': [''] * 14 + ['0', '16', '21']})
         Max_crel0004 = pd.DataFrame({'Max': [''] * 14 + ['15', '20', '25']})
@@ -1325,7 +1580,8 @@ def crelan():
         df_crel0005 = df_crel0005.drop(df_crel0005.columns[0:2], axis=1).drop(df_crel0005.columns[4:7], axis=1)
         df_crel0005.columns = ["Formules", "Taux"]
         df_crel0005["Taux"] = df_crel0005["Taux"].str.replace("%", "").str.strip()
-        df_crel0005["Formules"] = df_crel0005["Formules"].str.replace("â¤", "≤").str.strip()
+        df_crel0005["Taux"] = df_crel0005["Taux"].str.replace(",", ".").str.strip()
+        df_crel0005["Formules"] = "Taux 8/3/3 de >12.500 pour " + df_crel0005["Formules"].str.replace("â¤", "≤").str.strip()
 
         Min_crel0005 = pd.DataFrame({'Min': [''] * 17 + ['0', '12', '15', '18', '21', '24', '27']})
         Max_crel0005 = pd.DataFrame({'Max': [''] * 17 + ['11', '14', '17', '20', '23', '26', '30']})
@@ -1347,7 +1603,8 @@ def crelan():
         df_crel0006 = df_crel0006.drop(df_crel0006.columns[0:2], axis=1).drop(df_crel0006.columns[4:7], axis=1)
         df_crel0006.columns = ["Formules", "Taux"]
         df_crel0006["Taux"] = df_crel0006["Taux"].str.replace("%", "").str.strip()
-        df_crel0006["Formules"] = df_crel0006["Formules"].str.replace("â¤", "≤").str.strip()
+        df_crel0006["Taux"] = df_crel0006["Taux"].str.replace(",", ".").str.strip()
+        df_crel0006["Formules"] = "Taux 10/5/5 de >12.500 pour " + df_crel0006["Formules"].str.replace("â¤", "≤").str.strip()
 
         Min_crel0006 = pd.DataFrame({'Min': [''] * 24 + ['0', '16', '21']})
         Max_crel0006 = pd.DataFrame({'Max': [''] * 24 + ['15', '20', '25']})
@@ -1368,7 +1625,8 @@ def crelan():
         df_crel0007 = df_crel0007.drop(df_crel0007.columns[0:2], axis=1).drop(df_crel0007.columns[4:7], axis=1)
         df_crel0007.columns = ["Formules", "Taux"]
         df_crel0007["Taux"] = df_crel0007["Taux"].str.replace("%", "").str.strip()
-        df_crel0007["Formules"] = df_crel0007["Formules"].str.replace("â¤", "≤").str.strip()
+        df_crel0007["Taux"] = df_crel0007["Taux"].str.replace(",", ".").str.strip()
+        df_crel0007["Formules"] = "Taux 15/5/5 de >12.500 pour " + df_crel0007["Formules"].str.replace("â¤", "≤").str.strip()
 
         Min_crel0007 = pd.DataFrame({'Min': [''] * 33 + ['0', '21', '26']})
         Max_crel0007 = pd.DataFrame({'Max': [''] * 33 + ['20', '25', '30']})
@@ -1403,128 +1661,128 @@ def crelan_save():
 
 
 
-# #  _______ _                  _      # #
-# # (_______) |            _   (_)     # #
-# #  _____  | | ____ ____ | |_  _  ___ # #
-# # |  ___) | |/ _  |  _ \|  _)| |/___)# #
-# # | |_____| ( ( | | | | | |__| |___ |# #
-# # |_______)_|\_||_|_| |_|\___)_(___/ # #
-
-############################################# THE RATE IS NOT PUBLIC AS PER 09/05/2019 ######################################
-############################## Therefore we're not calling it in all() until it's published again ########################
-
-def elantis():
-    ###############################################################################################################
-    ############################################ELAN0001###########################################################
-    try:
-        global elan_c
-        df_elan = read_pdf('https://www.elantis.be/wp/wp-content/uploads/2019/02/tarif-credit-hypothecaire-fr.pdf', encoding='ISO-8859-1',
-                           area=[139.26, 68.64, 301.64, 406.26], pages=1, pandas_options={'header': None})
-        df_elan0001 = df_elan.drop(df_elan.index[0:4])
-        df_elan0001 = df_elan0001.drop(df_elan0001.columns[2:5], axis=1)
-        df_elan0001.columns = ["Formules", "Taux"]
-        df_elan0001["Formules"] = "Taux fixe de " + df_elan0001["Formules"].astype(str)  # add prefix to str value in df
-        df_elan0001["Taux"], df_elan0001["_Maandelijks_"] = df_elan0001["Taux"].str.split(' ', 1).str  # split the element within a table
-        df_elan0001 = df_elan0001.drop(df_elan0001.columns[2], axis=1)
-        df_elan0001["Taux"] = df_elan0001["Taux"].str.replace("%", "").str.strip()
-
-        Min_elan0001 = pd.DataFrame({'Min': [''] * 4 + ['0', '11', '16', '18', '21', '23']})
-        Max_elan0001 = pd.DataFrame({'Max': [''] * 4 + ['10', '15', '17', '20', '22', '25']})
-        duration_elan0001 = Min_elan0001.join(Max_elan0001)
-
-        df_elan0001.insert(0, 'Provider', 'Elantis')
-        df_elan0001.insert(1, 'Product_ID', 'ELAN0001')
-        df_elan0001.insert(2, 'Category', 'Home Loan')
-        df_elan0001 = df_elan0001.join(duration_elan0001)  # join newly made df with existed df
-        df_elan0001 = df_elan0001[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
-
-    ###############################################################################################################
-    ############################################ELAN0002###########################################################
-        df_elan0002 = read_pdf('https://www.elantis.be/wp/wp-content/uploads/2019/02/tarif-credit-hypothecaire-fr.pdf', encoding='ISO-8859-1',
-                               area=[139.26, 68.64, 301.64, 406.26], pages=1, pandas_options={'header': None})
-
-        df_elan0002 = df_elan0002.drop(df_elan0002.index[0:5]).drop(df_elan0002.index[6]).drop(df_elan0002.index[8])
-        df_elan0002 = df_elan0002.drop(df_elan0002.columns[1], axis=1).drop(df_elan0002.columns[3:5], axis=1)
-        df_elan0002.columns = ["Formules", "Taux"]
-        df_elan0002["Formules"] = "Taux fixe de " + df_elan0002["Formules"].astype(str)  # add prefix to str value in df
-        df_elan0002["Taux"], df_elan0002["_Maandelijks_"] = df_elan0002["Taux"].str.split(' ', 1).str  # split the element within a table
-        df_elan0002 = df_elan0002.drop(df_elan0002.columns[2], axis=1)
-        df_elan0002["Taux"] = df_elan0002["Taux"].str.replace("%", "").str.strip()
-
-        Min_elan0002 = pd.DataFrame({'Min': [''] * 5 + ['0', '', '16', '', '21']})
-        Max_elan0002 = pd.DataFrame({'Max': [''] * 5 + ['15', '', '20', '', '25']})
-        duration_elan0002 = Min_elan0002.join(Max_elan0002)
-
-        df_elan0002.insert(0, 'Provider', 'Elantis')
-        df_elan0002.insert(1, 'Product_ID', 'ELAN0002')
-        df_elan0002.insert(2, 'Category', 'Home Loan')
-        df_elan0002 = df_elan0002.join(duration_elan0002)  # join newly made df with existed df
-        df_elan0002 = df_elan0002[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
-
-    ###############################################################################################################
-    ############################################ELAN0003###########################################################
-        df_elan0003 = read_pdf('https://www.elantis.be/wp/wp-content/uploads/2019/02/tarif-credit-hypothecaire-fr.pdf', encoding='ISO-8859-1',
-                               area=[139.26, 68.64, 301.64, 406.26], pages=1, pandas_options={'header': None})
-
-        df_elan0003 = df_elan0003.drop(df_elan0003.index[0:4]).drop(df_elan0003.index[6]).drop(df_elan0003.index[8])
-        df_elan0003 = df_elan0003.drop(df_elan0003.columns[1:3], axis=1).drop(df_elan0003.columns[4], axis=1)
-        df_elan0003.columns = ["Formules", "Taux"]
-        df_elan0003["Formules"] = "Taux fixe de " + df_elan0003["Formules"].astype(str)  # add prefix to str value in df
-        df_elan0003["Taux"], df_elan0003["_Maandelijks_"] = df_elan0003["Taux"].str.split(' ', 1).str  # split the element within a table
-        df_elan0003 = df_elan0003.drop(df_elan0003.columns[2], axis=1)
-        df_elan0003["Taux"] = df_elan0003["Taux"].str.replace("%", "").str.strip()
-
-        Min_elan0003 = pd.DataFrame({'Min': [''] * 4 + ['0', '11', '', '16', '', '21']})
-        Max_elan0003 = pd.DataFrame({'Max': [''] * 4 + ['10', '15', '', '20', '', '25']})
-        duration_elan0003 = Min_elan0003.join(Max_elan0003)
-
-        df_elan0003.insert(0, 'Provider', 'Elantis')
-        df_elan0003.insert(1, 'Product_ID', 'ELAN0003')
-        df_elan0003.insert(2, 'Category', 'Home Loan')
-        df_elan0003 = df_elan0003.join(duration_elan0003)  # join newly made df with existed df
-        df_elan0003 = df_elan0003[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
-
-    ###############################################################################################################
-    ############################################ELAN0004###########################################################
-        df_elan0004 = read_pdf('https://www.elantis.be/wp/wp-content/uploads/2019/02/tarif-credit-hypothecaire-fr.pdf', encoding='ISO-8859-1',
-                               area=[139.26, 68.64, 301.64, 406.26], pages=1, pandas_options={'header': None})
-
-        df_elan0004 = df_elan0004.drop(df_elan0004.index[0:4]).drop(df_elan0004.index[6]).drop(df_elan0004.index[8])
-        df_elan0004 = df_elan0004.drop(df_elan0004.columns[1:4], axis=1)
-        df_elan0004.columns = ["Formules", "Taux"]
-        df_elan0004["Formules"] = "Taux fixe de " + df_elan0004["Formules"].astype(str)  # add prefix to str value in df
-        df_elan0004["Taux"], df_elan0004["_Maandelijks_"] = df_elan0004["Taux"].str.split(' ', 1).str  # split the element within a table
-        df_elan0004 = df_elan0004.drop(df_elan0004.columns[2], axis=1)
-        df_elan0004["Taux"] = df_elan0004["Taux"].str.replace("%", "").str.strip()
-
-        Min_elan0004 = pd.DataFrame({'Min': [''] * 4 + ['0', '11', '', '16', '', '21']})
-        Max_elan0004 = pd.DataFrame({'Max': [''] * 4 + ['10', '15', '', '20', '', '25']})
-        duration_elan0004 = Min_elan0004.join(Max_elan0004)
-
-        df_elan0004.insert(0, 'Provider', 'Elantis')
-        df_elan0004.insert(1, 'Product_ID', 'ELAN0004')
-        df_elan0004.insert(2, 'Category', 'Home Loan')
-        df_elan0004 = df_elan0004.join(duration_elan0004)  # join newly made df with existed df
-        df_elan0004 = df_elan0004[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
-
-        elan_c = pd.concat([
-            pd.concat([df_elan0001], axis=1),
-            pd.concat([df_elan0002], axis=1),
-            pd.concat([df_elan0003], axis=1),
-            pd.concat([df_elan0004], axis=1)
-        ])
-
-        print(tabulate(elan_c, headers='keys', tablefmt='psql', showindex="never"))
-    except:
-        pass
-
-def elan_save():
-    elantis()
-
-    path = os.path.abspath("History/")  # saving file to the folder history
-    file_name = str(datetime.datetime.now().strftime("%Y-%m-%d %H.%M")) + '.csv'
-
-    elan_c.to_csv(os.path.join(path, file_name), index=False)
+# # #  _______ _                  _      # #
+# # # (_______) |            _   (_)     # #
+# # #  _____  | | ____ ____ | |_  _  ___ # #
+# # # |  ___) | |/ _  |  _ \|  _)| |/___)# #
+# # # | |_____| ( ( | | | | | |__| |___ |# #
+# # # |_______)_|\_||_|_| |_|\___)_(___/ # #
+#
+# ############################################# THE RATE IS NOT PUBLIC AS PER 09/05/2019 ######################################
+# ############################## Therefore we're not calling it in all() until it's published again ########################
+#
+# def elantis():
+#     ###############################################################################################################
+#     ############################################ELAN0001###########################################################
+#     try:
+#         global elan_c
+#         df_elan = read_pdf('https://www.elantis.be/wp/wp-content/uploads/2019/02/tarif-credit-hypothecaire-fr.pdf', encoding='ISO-8859-1',
+#                            area=[139.26, 68.64, 301.64, 406.26], pages=1, pandas_options={'header': None})
+#         df_elan0001 = df_elan.drop(df_elan.index[0:4])
+#         df_elan0001 = df_elan0001.drop(df_elan0001.columns[2:5], axis=1)
+#         df_elan0001.columns = ["Formules", "Taux"]
+#         df_elan0001["Formules"] = "Taux fixe de " + df_elan0001["Formules"].astype(str)  # add prefix to str value in df
+#         df_elan0001["Taux"], df_elan0001["_Maandelijks_"] = df_elan0001["Taux"].str.split(' ', 1).str  # split the element within a table
+#         df_elan0001 = df_elan0001.drop(df_elan0001.columns[2], axis=1)
+#         df_elan0001["Taux"] = df_elan0001["Taux"].str.replace("%", "").str.strip()
+#
+#         Min_elan0001 = pd.DataFrame({'Min': [''] * 4 + ['0', '11', '16', '18', '21', '23']})
+#         Max_elan0001 = pd.DataFrame({'Max': [''] * 4 + ['10', '15', '17', '20', '22', '25']})
+#         duration_elan0001 = Min_elan0001.join(Max_elan0001)
+#
+#         df_elan0001.insert(0, 'Provider', 'Elantis')
+#         df_elan0001.insert(1, 'Product_ID', 'ELAN0001')
+#         df_elan0001.insert(2, 'Category', 'Home Loan')
+#         df_elan0001 = df_elan0001.join(duration_elan0001)  # join newly made df with existed df
+#         df_elan0001 = df_elan0001[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+#
+#     ###############################################################################################################
+#     ############################################ELAN0002###########################################################
+#         df_elan0002 = read_pdf('https://www.elantis.be/wp/wp-content/uploads/2019/02/tarif-credit-hypothecaire-fr.pdf', encoding='ISO-8859-1',
+#                                area=[139.26, 68.64, 301.64, 406.26], pages=1, pandas_options={'header': None})
+#
+#         df_elan0002 = df_elan0002.drop(df_elan0002.index[0:5]).drop(df_elan0002.index[6]).drop(df_elan0002.index[8])
+#         df_elan0002 = df_elan0002.drop(df_elan0002.columns[1], axis=1).drop(df_elan0002.columns[3:5], axis=1)
+#         df_elan0002.columns = ["Formules", "Taux"]
+#         df_elan0002["Formules"] = "Taux fixe de " + df_elan0002["Formules"].astype(str)  # add prefix to str value in df
+#         df_elan0002["Taux"], df_elan0002["_Maandelijks_"] = df_elan0002["Taux"].str.split(' ', 1).str  # split the element within a table
+#         df_elan0002 = df_elan0002.drop(df_elan0002.columns[2], axis=1)
+#         df_elan0002["Taux"] = df_elan0002["Taux"].str.replace("%", "").str.strip()
+#
+#         Min_elan0002 = pd.DataFrame({'Min': [''] * 5 + ['0', '', '16', '', '21']})
+#         Max_elan0002 = pd.DataFrame({'Max': [''] * 5 + ['15', '', '20', '', '25']})
+#         duration_elan0002 = Min_elan0002.join(Max_elan0002)
+#
+#         df_elan0002.insert(0, 'Provider', 'Elantis')
+#         df_elan0002.insert(1, 'Product_ID', 'ELAN0002')
+#         df_elan0002.insert(2, 'Category', 'Home Loan')
+#         df_elan0002 = df_elan0002.join(duration_elan0002)  # join newly made df with existed df
+#         df_elan0002 = df_elan0002[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+#
+#     ###############################################################################################################
+#     ############################################ELAN0003###########################################################
+#         df_elan0003 = read_pdf('https://www.elantis.be/wp/wp-content/uploads/2019/02/tarif-credit-hypothecaire-fr.pdf', encoding='ISO-8859-1',
+#                                area=[139.26, 68.64, 301.64, 406.26], pages=1, pandas_options={'header': None})
+#
+#         df_elan0003 = df_elan0003.drop(df_elan0003.index[0:4]).drop(df_elan0003.index[6]).drop(df_elan0003.index[8])
+#         df_elan0003 = df_elan0003.drop(df_elan0003.columns[1:3], axis=1).drop(df_elan0003.columns[4], axis=1)
+#         df_elan0003.columns = ["Formules", "Taux"]
+#         df_elan0003["Formules"] = "Taux fixe de " + df_elan0003["Formules"].astype(str)  # add prefix to str value in df
+#         df_elan0003["Taux"], df_elan0003["_Maandelijks_"] = df_elan0003["Taux"].str.split(' ', 1).str  # split the element within a table
+#         df_elan0003 = df_elan0003.drop(df_elan0003.columns[2], axis=1)
+#         df_elan0003["Taux"] = df_elan0003["Taux"].str.replace("%", "").str.strip()
+#
+#         Min_elan0003 = pd.DataFrame({'Min': [''] * 4 + ['0', '11', '', '16', '', '21']})
+#         Max_elan0003 = pd.DataFrame({'Max': [''] * 4 + ['10', '15', '', '20', '', '25']})
+#         duration_elan0003 = Min_elan0003.join(Max_elan0003)
+#
+#         df_elan0003.insert(0, 'Provider', 'Elantis')
+#         df_elan0003.insert(1, 'Product_ID', 'ELAN0003')
+#         df_elan0003.insert(2, 'Category', 'Home Loan')
+#         df_elan0003 = df_elan0003.join(duration_elan0003)  # join newly made df with existed df
+#         df_elan0003 = df_elan0003[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+#
+#     ###############################################################################################################
+#     ############################################ELAN0004###########################################################
+#         df_elan0004 = read_pdf('https://www.elantis.be/wp/wp-content/uploads/2019/02/tarif-credit-hypothecaire-fr.pdf', encoding='ISO-8859-1',
+#                                area=[139.26, 68.64, 301.64, 406.26], pages=1, pandas_options={'header': None})
+#
+#         df_elan0004 = df_elan0004.drop(df_elan0004.index[0:4]).drop(df_elan0004.index[6]).drop(df_elan0004.index[8])
+#         df_elan0004 = df_elan0004.drop(df_elan0004.columns[1:4], axis=1)
+#         df_elan0004.columns = ["Formules", "Taux"]
+#         df_elan0004["Formules"] = "Taux fixe de " + df_elan0004["Formules"].astype(str)  # add prefix to str value in df
+#         df_elan0004["Taux"], df_elan0004["_Maandelijks_"] = df_elan0004["Taux"].str.split(' ', 1).str  # split the element within a table
+#         df_elan0004 = df_elan0004.drop(df_elan0004.columns[2], axis=1)
+#         df_elan0004["Taux"] = df_elan0004["Taux"].str.replace("%", "").str.strip()
+#
+#         Min_elan0004 = pd.DataFrame({'Min': [''] * 4 + ['0', '11', '', '16', '', '21']})
+#         Max_elan0004 = pd.DataFrame({'Max': [''] * 4 + ['10', '15', '', '20', '', '25']})
+#         duration_elan0004 = Min_elan0004.join(Max_elan0004)
+#
+#         df_elan0004.insert(0, 'Provider', 'Elantis')
+#         df_elan0004.insert(1, 'Product_ID', 'ELAN0004')
+#         df_elan0004.insert(2, 'Category', 'Home Loan')
+#         df_elan0004 = df_elan0004.join(duration_elan0004)  # join newly made df with existed df
+#         df_elan0004 = df_elan0004[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+#
+#         elan_c = pd.concat([
+#             pd.concat([df_elan0001], axis=1),
+#             pd.concat([df_elan0002], axis=1),
+#             pd.concat([df_elan0003], axis=1),
+#             pd.concat([df_elan0004], axis=1)
+#         ])
+#
+#         print(tabulate(elan_c, headers='keys', tablefmt='psql', showindex="never"))
+#     except:
+#         pass
+#
+# def elan_save():
+#     elantis()
+#
+#     path = os.path.abspath("History/")  # saving file to the folder history
+#     file_name = str(datetime.datetime.now().strftime("%Y-%m-%d %H.%M")) + '.csv'
+#
+#     elan_c.to_csv(os.path.join(path, file_name), index=False)
 
 # # (_______)     | |                | |      # #
 # #  _____ ____ _ | | ____  ____ ____| | ____ # #
@@ -1537,117 +1795,197 @@ def federale():
     ############################################FEDE0001###########################################################
     try:
         global fede_c
-        df_fede = read_pdf('https://www.federale.be/docs/default-source/default-document-library/particulieren-particuliers/tarif-ch-30-01-2019.pdf?sfvrsn=9f4b78d7_4', encoding='ISO-8859-1',
-                           pages=1, pandas_options={'header': None})
+        df_fede_source = read_pdf('https://www.federale.be/docs/default-source/default-document-library/particulieren-particuliers/tarif-ch-30-01-2019.pdf?sfvrsn=9f4b78d7_4', encoding='ISO-8859-1',
+                                  pages=1, pandas_options={'header': None})
 
-        df_fede0001 = df_fede.drop(df_fede.index[0:3]).drop(df_fede.index[6:22])
+        ## Taking rates for >25000
+        df_fede0001 = df_fede_source.drop(df_fede_source.index[0:3]).drop(df_fede_source.index[6:22])
         df_fede0001 = df_fede0001.drop(df_fede0001.columns[2:24], axis=1)
         df_fede0001.columns = ["Formules", "Taux"]
         df_fede0001["Formules"] = df_fede0001["Formules"].str.replace(" â¤", "≤").str.strip()
-        df_fede0001["Formules"] = "Taux fixe de " + df_fede0001["Formules"].astype(str)  # add prefix to str value in df
+        df_fede0001["Taux"] = df_fede0001["Taux"].str.replace(",", ".").str.strip()
+        df_fede0001["Formules"] = "Taux fixe >25000 de " + df_fede0001["Formules"].astype(str)  # add prefix to str value in df
 
-        Min_fede0001 = pd.DataFrame({'Min': [''] * 3 + ['5', '11', '16']})
-        Max_fede0001 = pd.DataFrame({'Max': [''] * 3 + ['10', '15', '20']})
+        ## Taking rates for <25000
+        df_fede0001_2 = df_fede_source.drop(df_fede_source.index[0:3]).drop(df_fede_source.index[6:22])
+        df_fede0001_2 = df_fede0001_2.drop(df_fede0001_2.columns[2:24], axis=1)
+        df_fede0001_2.columns = ["Formules", "Taux"]
+        df_fede0001_2["Formules"] = df_fede0001_2["Formules"].str.replace(" â¤", "≤").str.strip()
+        df_fede0001_2["Taux"] = df_fede0001_2["Taux"].str.replace(",", ".").str.strip()
+        df_fede0001_2["Formules"] = "Taux fixe <25000 de " + df_fede0001_2["Formules"].astype(str)  # add prefix to str value in df
+
+        df_fede0001_2["Taux"] = ((df_fede0001_2["Taux"].astype(float) / 100) + (0.5 / 100)) * 100
+
+        # Concatenate rates for >25000 and <25000
+        df_fede0001.columns = df_fede0001_2.columns
+        data_fede0001 = pd.concat([df_fede0001, df_fede0001_2])
+
+        Min_fede0001 = pd.DataFrame({'Min': [''] * 3 + ['5', '11', '16'] * 2})
+        Max_fede0001 = pd.DataFrame({'Max': [''] * 3 + ['10', '15', '20'] * 2})
         duration_fede0001 = Min_fede0001.join(Max_fede0001)
 
-        df_fede0001.insert(0, 'Provider', 'Federale')
-        df_fede0001.insert(1, 'Product_ID', 'FEDE0001')
-        df_fede0001.insert(2, 'Category', 'Home Loan')
-        df_fede0001 = df_fede0001.join(duration_fede0001)  # join newly made df with existed df
-        df_fede0001 = df_fede0001[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+        data_fede0001.insert(0, 'Provider', 'Federale')
+        data_fede0001.insert(1, 'Product_ID', 'FEDE0001')
+        data_fede0001.insert(2, 'Category', 'Home Loan')
+        data_fede0001 = data_fede0001.join(duration_fede0001)  # join newly made df with existed df
+        data_fede0001 = data_fede0001[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
 
     ###############################################################################################################
     ############################################FEDE0002###########################################################
-        df_fede = read_pdf('https://www.federale.be/docs/default-source/default-document-library/particulieren-particuliers/tarif-ch-30-01-2019.pdf?sfvrsn=9f4b78d7_4', encoding='ISO-8859-1',
-                           pages=1, pandas_options={'header': None})
+        df_fede_source = read_pdf('https://www.federale.be/docs/default-source/default-document-library/particulieren-particuliers/tarif-ch-30-01-2019.pdf?sfvrsn=9f4b78d7_4', encoding='ISO-8859-1',
+                                  pages=1, pandas_options={'header': None})
 
-        df_fede0002 = df_fede.drop(df_fede.index[0:9]).drop(df_fede.index[10:22])
+        ## Taking rates for >25000
+        df_fede0002 = df_fede_source.drop(df_fede_source.index[0:9]).drop(df_fede_source.index[10:22])
         df_fede0002 = df_fede0002.drop(df_fede0002.columns[2:24], axis=1)
         df_fede0002.columns = ["Formules", "Taux"]
         df_fede0002["Formules"] = df_fede0002["Formules"].str.replace(" â¤", "≤").str.strip()
-        df_fede0002["Formules"] = "(15/5 +2-2 ) de " + df_fede0002["Formules"].astype(str)  # add prefix to str value in df
+        df_fede0002["Taux"] = df_fede0002["Taux"].str.replace(",", ".").str.strip()
+        df_fede0002["Formules"] = "Taux >25000 15/5 +2-2 de " + df_fede0002["Formules"].astype(str)  # add prefix to str value in df
 
-        Min_fede0002 = pd.DataFrame({'Min': [''] * 9 + ['16']})
-        Max_fede0002 = pd.DataFrame({'Max': [''] * 9 + ['30']})
+        ## Taking rates for <25000
+        df_fede0002_2 = df_fede_source.drop(df_fede_source.index[0:9]).drop(df_fede_source.index[10:22])
+        df_fede0002_2 = df_fede0002_2.drop(df_fede0002_2.columns[2:24], axis=1)
+        df_fede0002_2.columns = ["Formules", "Taux"]
+        df_fede0002_2["Formules"] = df_fede0002_2["Formules"].str.replace(" â¤", "≤").str.strip()
+        df_fede0002_2["Taux"] = df_fede0002_2["Taux"].str.replace(",", ".").str.strip()
+        df_fede0002_2["Formules"] = "Taux < 25000 15/5 +2-2 de " + df_fede0002_2["Formules"].astype(str)  # add prefix to str value in df
+
+        df_fede0002_2["Taux"] = ((df_fede0002_2["Taux"].astype(float) / 100) + (0.5 / 100)) * 100
+
+        # Concatenate rates for >25000 and <25000
+        df_fede0002.columns = df_fede0002_2.columns
+        data_fede0002 = pd.concat([df_fede0002, df_fede0002_2])
+
+        Min_fede0002 = pd.DataFrame({'Min': [''] * 9 + ['15'] * 2})
+        Max_fede0002 = pd.DataFrame({'Max': [''] * 9 + ['30'] * 2})
         duration_fede0002 = Min_fede0002.join(Max_fede0002)
 
-        df_fede0002.insert(0, 'Provider', 'Federale')
-        df_fede0002.insert(1, 'Product_ID', 'FEDE0002')
-        df_fede0002.insert(2, 'Category', 'Home Loan')
-        df_fede0002 = df_fede0002.join(duration_fede0002)  # join newly made df with existed df
-        df_fede0002 = df_fede0002[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+        data_fede0002.insert(0, 'Provider', 'Federale')
+        data_fede0002.insert(1, 'Product_ID', 'FEDE0002')
+        data_fede0002.insert(2, 'Category', 'Home Loan')
+        data_fede0002 = data_fede0002.join(duration_fede0002)  # join newly made df with existed df
+        data_fede0002 = data_fede0002[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
-    ###############################################################################################################
+        ###############################################################################################################
     ############################################FEDE0003###########################################################
-        df_fede = read_pdf('https://www.federale.be/docs/default-source/default-document-library/particulieren-particuliers/tarif-ch-30-01-2019.pdf?sfvrsn=9f4b78d7_4', encoding='ISO-8859-1',
-                           pages=1, pandas_options={'header': None})
+        df_fede_source = read_pdf('https://www.federale.be/docs/default-source/default-document-library/particulieren-particuliers/tarif-ch-30-01-2019.pdf?sfvrsn=9f4b78d7_4', encoding='ISO-8859-1',
+                                  pages=1, pandas_options={'header': None})
 
-        df_fede0003 = df_fede.drop(df_fede.index[0:13]).drop(df_fede.index[14:22])
+        # Taking rates for >25000
+        df_fede0003 = df_fede_source.drop(df_fede_source.index[0:13]).drop(df_fede_source.index[14:22])
         df_fede0003 = df_fede0003.drop(df_fede0003.columns[2:24], axis=1)
         df_fede0003.columns = ["Formules", "Taux"]
         df_fede0003["Formules"] = df_fede0003["Formules"].str.replace(" â¤", "≤").str.strip()
-        df_fede0003["Formules"] = "(10/5 +2-2 ) de " + df_fede0003["Formules"].astype(str)  # add prefix to str value in df
+        df_fede0003["Taux"] = df_fede0003["Taux"].str.replace(",", ".").str.strip()
+        df_fede0003["Formules"] = "Taux >25000 10/5 +2-2 de " + df_fede0003["Formules"].astype(str)  # add prefix to str value in df
 
-        Min_fede0003 = pd.DataFrame({'Min': [''] * 13 + ['11']})
-        Max_fede0003 = pd.DataFrame({'Max': [''] * 13 + ['30']})
+        ## Taking rates for <25000
+        df_fede0003_2 = df_fede_source.drop(df_fede_source.index[0:13]).drop(df_fede_source.index[14:22])
+        df_fede0003_2 = df_fede0003_2.drop(df_fede0003_2.columns[2:24], axis=1)
+        df_fede0003_2.columns = ["Formules", "Taux"]
+        df_fede0003_2["Formules"] = df_fede0003_2["Formules"].str.replace(" â¤", "≤").str.strip()
+        df_fede0003_2["Taux"] = df_fede0003_2["Taux"].str.replace(",", ".").str.strip()
+        df_fede0003_2["Formules"] = "Taux < 25000 10/5 +2-2 de " + df_fede0003_2["Formules"].astype(str)  # add prefix to str value in df
+
+        df_fede0003_2["Taux"] = ((df_fede0003_2["Taux"].astype(float) / 100) + (0.5 / 100)) * 100
+
+        # Concatenate rates for >25000 and <25000
+        df_fede0003.columns = df_fede0003_2.columns
+        data_fede0003 = pd.concat([df_fede0003, df_fede0003_2])
+
+        Min_fede0003 = pd.DataFrame({'Min': [''] * 13 + ['10'] * 2})
+        Max_fede0003 = pd.DataFrame({'Max': [''] * 13 + ['30'] * 2})
         duration_fede0003 = Min_fede0003.join(Max_fede0003)
 
-        df_fede0003.insert(0, 'Provider', 'Federale')
-        df_fede0003.insert(1, 'Product_ID', 'FEDE0003')
-        df_fede0003.insert(2, 'Category', 'Home Loan')
-        df_fede0003 = df_fede0003.join(duration_fede0003)  # join newly made df with existed df
-        df_fede0003 = df_fede0003[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+        data_fede0003.insert(0, 'Provider', 'Federale')
+        data_fede0003.insert(1, 'Product_ID', 'FEDE0003')
+        data_fede0003.insert(2, 'Category', 'Home Loan')
+        data_fede0003 = data_fede0003.join(duration_fede0003)  # join newly made df with existed df
+        data_fede0003 = data_fede0003[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
 
     ###############################################################################################################
     ############################################FEDE0004###########################################################
-        df_fede = read_pdf('https://www.federale.be/docs/default-source/default-document-library/particulieren-particuliers/tarif-ch-30-01-2019.pdf?sfvrsn=9f4b78d7_4', encoding='ISO-8859-1',
-                           pages=1, pandas_options={'header': None})
+        df_fede_source = read_pdf('https://www.federale.be/docs/default-source/default-document-library/particulieren-particuliers/tarif-ch-30-01-2019.pdf?sfvrsn=9f4b78d7_4', encoding='ISO-8859-1',
+                                  pages=1, pandas_options={'header': None})
 
-        df_fede0004 = df_fede.drop(df_fede.index[0:17]).drop(df_fede.index[18:22])
+        # Taking rates for >25000
+        df_fede0004 = df_fede_source.drop(df_fede_source.index[0:17]).drop(df_fede_source.index[18:22])
         df_fede0004 = df_fede0004.drop(df_fede0004.columns[2:24], axis=1)
         df_fede0004.columns = ["Formules", "Taux"]
         df_fede0004["Formules"] = df_fede0004["Formules"].str.replace(" â¤", "≤").str.strip()
-        df_fede0004["Formules"] = "(5/5 +2-2 ) de " + df_fede0004["Formules"].astype(str)  # add prefix to str value in df
+        df_fede0004["Taux"] = df_fede0004["Taux"].str.replace(",", ".").str.strip()
+        df_fede0004["Formules"] = "Taux >25000 5/5 +2-2 de " + df_fede0004["Formules"].astype(str)  # add prefix to str value in df
 
-        Min_fede0004 = pd.DataFrame({'Min': [''] * 17 + ['6']})
-        Max_fede0004 = pd.DataFrame({'Max': [''] * 17 + ['30']})
+        ## Taking rates for <25000
+        df_fede0004_2 = df_fede_source.drop(df_fede_source.index[0:17]).drop(df_fede_source.index[18:22])
+        df_fede0004_2 = df_fede0004_2.drop(df_fede0004_2.columns[2:24], axis=1)
+        df_fede0004_2.columns = ["Formules", "Taux"]
+        df_fede0004_2["Formules"] = df_fede0004_2["Formules"].str.replace(" â¤", "≤").str.strip()
+        df_fede0004_2["Taux"] = df_fede0004_2["Taux"].str.replace(",", ".").str.strip()
+        df_fede0004_2["Formules"] = "Taux < 25000 5/5 +2-2 de " + df_fede0004_2["Formules"].astype(str)  # add prefix to str value in df
+
+        df_fede0004_2["Taux"] = ((df_fede0004_2["Taux"].astype(float) / 100) + (0.5 / 100)) * 100
+
+        # Concatenate rates for >25000 and <25000
+        df_fede0004.columns = df_fede0004_2.columns
+        data_fede0004 = pd.concat([df_fede0004, df_fede0004_2])
+
+        Min_fede0004 = pd.DataFrame({'Min': [''] * 17 + ['5'] * 2})
+        Max_fede0004 = pd.DataFrame({'Max': [''] * 17 + ['30'] * 2})
         duration_fede0004 = Min_fede0004.join(Max_fede0004)
 
-        df_fede0004.insert(0, 'Provider', 'Federale')
-        df_fede0004.insert(1, 'Product_ID', 'FEDE0004')
-        df_fede0004.insert(2, 'Category', 'Home Loan')
-        df_fede0004 = df_fede0004.join(duration_fede0004)  # join newly made df with existed df
-        df_fede0004 = df_fede0004[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+        data_fede0004.insert(0, 'Provider', 'Federale')
+        data_fede0004.insert(1, 'Product_ID', 'FEDE0004')
+        data_fede0004.insert(2, 'Category', 'Home Loan')
+        data_fede0004 = data_fede0004.join(duration_fede0004)  # join newly made df with existed df
+        data_fede0004 = data_fede0004[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
     ###############################################################################################################
     ############################################FEDE0005###########################################################
-        df_fede = read_pdf('https://www.federale.be/docs/default-source/default-document-library/particulieren-particuliers/tarif-ch-30-01-2019.pdf?sfvrsn=9f4b78d7_4', encoding='ISO-8859-1',
-                           pages=1, pandas_options={'header': None})
+        df_fede_source = read_pdf('https://www.federale.be/docs/default-source/default-document-library/particulieren-particuliers/tarif-ch-30-01-2019.pdf?sfvrsn=9f4b78d7_4', encoding='ISO-8859-1',
+                                  pages=1, pandas_options={'header': None})
 
-        df_fede0005 = df_fede.drop(df_fede.index[0:21])
+        # Taking rates for >25000
+        df_fede0005 = df_fede_source.drop(df_fede_source.index[0:21])
         df_fede0005 = df_fede0005.drop(df_fede0005.columns[2:24], axis=1)
         df_fede0005.columns = ["Formules", "Taux"]
         df_fede0005["Formules"] = df_fede0005["Formules"].str.replace(" â¤", "≤").str.strip()
-        df_fede0005["Formules"] = "(1/1 +3-3 ) de " + df_fede0005["Formules"].astype(str)  # add prefix to str value in df
+        df_fede0005["Taux"] = df_fede0005["Taux"].str.replace(",", ".").str.strip()
+        df_fede0005["Formules"] = "Taux >25000 1/1 +3-3 de " + df_fede0005["Formules"].astype(str)  # add prefix to str value in df
 
-        Min_fede0005 = pd.DataFrame({'Min': [''] * 21 + ['5']})
-        Max_fede0005 = pd.DataFrame({'Max': [''] * 21 + ['30']})
+        ## Taking rates for <25000
+        df_fede0005_2 = df_fede_source.drop(df_fede_source.index[0:21])
+        df_fede0005_2 = df_fede0005_2.drop(df_fede0005_2.columns[2:24], axis=1)
+        df_fede0005_2.columns = ["Formules", "Taux"]
+        df_fede0005_2["Formules"] = df_fede0005_2["Formules"].str.replace(" â¤", "≤").str.strip()
+        df_fede0005_2["Taux"] = df_fede0005_2["Taux"].str.replace(",", ".").str.strip()
+        df_fede0005_2["Formules"] = "Taux < 25000 1/1 +3-3 de " + df_fede0005_2["Formules"].astype(str)  # add prefix to str value in df
+
+        df_fede0005_2["Taux"] = ((df_fede0005_2["Taux"].astype(float) / 100) + (0.5 / 100)) * 100
+
+        # Concatenate rates for >25000 and <25000
+        df_fede0005.columns = df_fede0005_2.columns
+        data_fede0005 = pd.concat([df_fede0005, df_fede0005_2])
+
+        Min_fede0005 = pd.DataFrame({'Min': [''] * 21 + ['5'] * 2})
+        Max_fede0005 = pd.DataFrame({'Max': [''] * 21 + ['30'] * 2})
         duration_fede0005 = Min_fede0005.join(Max_fede0005)
 
-        df_fede0005.insert(0, 'Provider', 'Federale')
-        df_fede0005.insert(1, 'Product_ID', 'FEDE0005')
-        df_fede0005.insert(2, 'Category', 'Home Loan')
-        df_fede0005 = df_fede0005.join(duration_fede0005)  # join newly made df with existed df
-        df_fede0005 = df_fede0005[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+        data_fede0005.insert(0, 'Provider', 'Federale')
+        data_fede0005.insert(1, 'Product_ID', 'FEDE0005')
+        data_fede0005.insert(2, 'Category', 'Home Loan')
+        data_fede0005 = data_fede0005.join(duration_fede0005)  # join newly made df with existed df
+        data_fede0005 = data_fede0005[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
         fede_c = pd.concat([
-            pd.concat([df_fede0001], axis=1),
-            pd.concat([df_fede0002], axis=1),
-            pd.concat([df_fede0003], axis=1),
-            pd.concat([df_fede0004], axis=1),
-            pd.concat([df_fede0005], axis=1)
+            pd.concat([data_fede0001], axis=1),
+            pd.concat([data_fede0002], axis=1),
+            pd.concat([data_fede0003], axis=1),
+            pd.concat([data_fede0004], axis=1),
+            pd.concat([data_fede0005], axis=1)
         ])
 
         print(tabulate(fede_c, headers='keys', tablefmt='psql', showindex="never"))
@@ -1685,6 +2023,7 @@ def hellobank():
         df_hbnk0001["Formules"], df_hbnk0001["Taux"] = df_hbnk0001["Formules"].str.split('fixe ', 1).str  # split the element within a table
         df_hbnk0001["Formules"] = "Taux fixe de " + df_hbnk0001["Formules"].astype(str)  # add prefix to str value in df
         df_hbnk0001["Taux"] = df_hbnk0001["Taux"].str.replace("%", "").str.strip()
+        df_hbnk0001["Taux"] = df_hbnk0001["Taux"].str.replace(",", ".").str.strip()
 
         Min_hbnk0001 = pd.DataFrame({'Min': [''] * 7 + ['15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25']})
         Max_hbnk0001 = pd.DataFrame({'Max': [''] * 7 + ['15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25']})
@@ -1719,12 +2058,13 @@ def ing():
     try:
         global ingx_c
         df_ing = read_pdf('https://www.ing.be/static/legacy/SiteCollectionDocuments/Bareme_CH_FR.pdf', encoding='ISO-8859-1',
-                          pages=1, area=[172.87, 21.74, 237.13, 524.72], pandas_options={'header': None})
+                          pages=1, area=[123.28, 16.25, 502.15, 827.29], pandas_options={'header': None})
 
         df_ingx0001 = df_ing.drop(df_ing.index[0:3]).drop(df_ing.index[9:38])
         df_ingx0001 = df_ingx0001.drop(df_ingx0001.columns[1:7], axis=1).drop(df_ingx0001.columns[8:16], axis=1)
         df_ingx0001.columns = ["Formules", "Taux"]
         df_ingx0001["Taux"] = df_ingx0001["Taux"].str.replace(" %", "").str.strip()
+        df_ingx0001["Taux"] = df_ingx0001["Taux"].str.replace(",", ".").str.strip()
 
         Min_ingx0001 = pd.DataFrame({'Min': [''] * 3 + ['0', '6', '11', '16', '21', '25']})
         Max_ingx0001 = pd.DataFrame({'Max': [''] * 3 + ['5', '10', '15', '20', '25', '30']})
@@ -1743,6 +2083,7 @@ def ing():
         df_ingx0002 = df_ingx0002.drop(df_ingx0002.columns[0:7], axis=1).drop(df_ingx0002.columns[8:16], axis=1)
         df_ingx0002.columns = ["Taux"]
         df_ingx0002["Taux"] = df_ingx0002["Taux"].str.replace(" %", "").str.strip()
+        df_ingx0002["Taux"] = df_ingx0002["Taux"].str.replace(",", ".").str.strip()
 
         Min_ingx0002 = pd.DataFrame({'Min': [''] * 11 + ['0', '6', '11', '16', '21', '25']})
         Max_ingx0002 = pd.DataFrame({'Max': [''] * 11 + ['5', '10', '15', '20', '25', '30']})
@@ -1762,6 +2103,7 @@ def ing():
         df_ingx0003 = df_ingx0003.drop(df_ingx0003.columns[0:7], axis=1).drop(df_ingx0003.columns[8:16], axis=1)
         df_ingx0003.columns = ["Taux"]
         df_ingx0003["Taux"] = df_ingx0003["Taux"].str.replace(" %", "").str.strip()
+        df_ingx0003["Taux"] = df_ingx0003["Taux"].str.replace(",", ".").str.strip()
 
         Min_ingx0003 = pd.DataFrame({'Min': [''] * 18 + ['0', '11', '16', '21', '25']})
         Max_ingx0003 = pd.DataFrame({'Max': [''] * 18 + ['10', '15', '20', '25', '30']})
@@ -1781,6 +2123,7 @@ def ing():
         df_ingx0004 = df_ingx0004.drop(df_ingx0004.columns[0:7], axis=1).drop(df_ingx0004.columns[8:16], axis=1)
         df_ingx0004.columns = ["Taux"]
         df_ingx0004["Taux"] = df_ingx0004["Taux"].str.replace(" %", "").str.strip()
+        df_ingx0004["Taux"] = df_ingx0004["Taux"].str.replace(",", ".").str.strip()
 
         Min_ingx0004 = pd.DataFrame({'Min': [''] * 24 + ['0', '16', '21', '25']})
         Max_ingx0004 = pd.DataFrame({'Max': [''] * 24 + ['15', '20', '25', '30']})
@@ -1800,6 +2143,7 @@ def ing():
         df_ingx0005 = df_ingx0005.drop(df_ingx0005.columns[0:7], axis=1).drop(df_ingx0005.columns[8:16], axis=1)
         df_ingx0005.columns = ["Taux"]
         df_ingx0005["Taux"] = df_ingx0005["Taux"].str.replace(" %", "").str.strip()
+        df_ingx0005["Taux"] = df_ingx0005["Taux"].str.replace(",", ".").str.strip()
 
         Min_ingx0005 = pd.DataFrame({'Min': [''] * 29 + ['0', '16', '21', '25']})
         Max_ingx0005 = pd.DataFrame({'Max': [''] * 29 + ['15', '20', '25', '30']})
@@ -1841,98 +2185,168 @@ def kbc():
     ############################################KBC0001###########################################################
     try:
         global kbcx_c
-        df_kbcx0001 = read_pdf('https://multimediafiles.kbcgroup.eu/ng/published/KBC/PDF/WONEN/kbc-woningkrediet-tarievenkaart.pdf', encoding='ISO-8859-1',
-                               area=[197.21, 810.72, 278.95, 1020.8], pages=1, pandas_options={'header': None})
+        df_kbcx0001_source = read_pdf('https://multimediafiles.kbcgroup.eu/ng/published/KBC/PDF/WONEN/kbc-woningkrediet-tarievenkaart.pdf', encoding='ISO-8859-1',
+                                      area=[197.21, 810.72, 278.95, 1020.8], pages=1, pandas_options={'header': None})
 
-        df_kbcx0001 = df_kbcx0001.drop(df_kbcx0001.index[0:3])
+        ## Rate for >25000
+        df_kbcx0001 = df_kbcx0001_source.drop(df_kbcx0001_source.index[0:3])
         df_kbcx0001.columns = ["Formules", "_Taux_"]
         df_kbcx0001['Taux'], df_kbcx0001['_Maandelijks_'] = df_kbcx0001['_Taux_'].str.split(' % ', 1).str  # split the element within a table
         df_kbcx0001 = df_kbcx0001.drop(df_kbcx0001.columns[1], axis=1).drop(df_kbcx0001.columns[3], axis=1)  # drop the unintended columns
-        df_kbcx0001["Formules"] = "Taux fixe de >25000 pour  " + df_kbcx0001["Formules"].astype(str)  # add prefix to str value in df
+        df_kbcx0001["Formules"] = "Taux fixe de > 25000 pour  " + df_kbcx0001["Formules"].astype(str)  # add prefix to str value in df
         df_kbcx0001["Formules"] = df_kbcx0001["Formules"].str.replace("jaar", "ans").str.strip()
         df_kbcx0001["Formules"] = df_kbcx0001["Formules"].str.replace("en", " ").str.strip()
+        df_kbcx0001["Taux"] = df_kbcx0001["Taux"].str.replace(",", ".").str.strip()
 
-        Min_kbcx0001 = pd.DataFrame({'Min': [''] * 3 + ['0', '6', '11', '16', '21']})
-        Max_kbcx0001 = pd.DataFrame({'Max': [''] * 3 + ['5', '10', '15', '20', '25']})
+        ## Rate for <25000
+        df_kbcx0001_2 = df_kbcx0001_source.drop(df_kbcx0001_source.index[0:3])
+        df_kbcx0001_2.columns = ["Formules", "_Taux_"]
+        df_kbcx0001_2['Taux'], df_kbcx0001_2['_Maandelijks_'] = df_kbcx0001_2['_Taux_'].str.split(' % ', 1).str  # split the element within a table
+        df_kbcx0001_2 = df_kbcx0001_2.drop(df_kbcx0001_2.columns[1], axis=1).drop(df_kbcx0001_2.columns[3], axis=1)  # drop the unintended columns
+        df_kbcx0001_2["Formules"] = "Taux fixe de < 25000 pour  " + df_kbcx0001_2["Formules"].astype(str)  # add prefix to str value in df
+        df_kbcx0001_2["Formules"] = df_kbcx0001_2["Formules"].str.replace("jaar", "ans").str.strip()
+        df_kbcx0001_2["Formules"] = df_kbcx0001_2["Formules"].str.replace("en", " ").str.strip()
+        df_kbcx0001_2["Taux"] = df_kbcx0001_2["Taux"].str.replace(",", ".").str.strip()
+
+        df_kbcx0001_2["Taux"] = ((df_kbcx0001_2["Taux"].astype(float) / 100) + (0.25 / 100)) * 100
+
+        # Concatenate rates for >25000 and <25000
+        df_kbcx0001.columns = df_kbcx0001_2.columns
+        data_kbcx0001 = pd.concat([df_kbcx0001, df_kbcx0001_2])
+
+        Min_kbcx0001 = pd.DataFrame({'Min': [''] * 3 + ['0', '6', '11', '16', '21'] * 2})
+        Max_kbcx0001 = pd.DataFrame({'Max': [''] * 3 + ['5', '10', '15', '20', '25'] * 2})
         duration_kbcx0001 = Min_kbcx0001.join(Max_kbcx0001)
 
-        df_kbcx0001.insert(0, 'Provider', 'KBC')
-        df_kbcx0001.insert(1, 'Product_ID', 'KBC0001')
-        df_kbcx0001.insert(2, 'Category', 'Home Loan')
-        df_kbcx0001 = df_kbcx0001.join(duration_kbcx0001)  # join newly made df with existed df
-        df_kbcx0001 = df_kbcx0001[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+        data_kbcx0001.insert(0, 'Provider', 'KBC')
+        data_kbcx0001.insert(1, 'Product_ID', 'KBC0001')
+        data_kbcx0001.insert(2, 'Category', 'Home Loan')
+        data_kbcx0001 = data_kbcx0001.join(duration_kbcx0001)  # join newly made df with existed df
+        data_kbcx0001 = data_kbcx0001[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
-    ###############################################################################################################
+
+        ###############################################################################################################
     ############################################KBC0002###########################################################
-        df_kbcx0002 = read_pdf('https://multimediafiles.kbcgroup.eu/ng/published/KBC/PDF/WONEN/kbc-woningkrediet-tarievenkaart.pdf', encoding='ISO-8859-1',
-                               area=[164.01, -0.86, 292.4, 273.03], pages=1, pandas_options={'header': None})
+        df_kbcx0002_source = read_pdf('https://multimediafiles.kbcgroup.eu/ng/published/KBC/PDF/WONEN/kbc-woningkrediet-tarievenkaart.pdf', encoding='ISO-8859-1',
+                                      area=[164.01, -0.86, 292.4, 273.03], pages=1, pandas_options={'header': None})
 
-        df_kbcx0002 = df_kbcx0002.drop(df_kbcx0002.index[0:5])
+        ## Rate for >25000
+        df_kbcx0002 = df_kbcx0002_source.drop(df_kbcx0002_source.index[0:5])
         df_kbcx0002["_Form_"], df_kbcx0002["_Maandelijks_"] = df_kbcx0002[0].str.split(' % ', 1).str  # split the element within a table
         df_kbcx0002["_Form_"] = df_kbcx0002["_Form_"].str.replace(" j", "ans").str.strip()
         df_kbcx0002['Formules'], df_kbcx0002['Taux'] = df_kbcx0002['_Form_'].str.split(' ', 1).str
         df_kbcx0002 = df_kbcx0002.drop(df_kbcx0002.columns[0:3], axis=1)  # drop the unintended columns
         df_kbcx0002["Formules"] = "Taux 1/1/1 (+3/-3) de >25000 pour  " + df_kbcx0002["Formules"].astype(str)  # add prefix to str value in df
+        df_kbcx0002["Taux"] = df_kbcx0002["Taux"].str.replace(",", ".").str.strip()
 
-        Min_kbcx0002 = pd.DataFrame({'Min': [''] * 5 + ['0', '11', '16', '21']})
-        Max_kbcx0002 = pd.DataFrame({'Max': [''] * 5 + ['10', '15', '20', '25']})
+        ## Rate for <25000
+        df_kbcx0002_2 = df_kbcx0002_source.drop(df_kbcx0002_source.index[0:5])
+        df_kbcx0002_2["_Form_"], df_kbcx0002_2["_Maandelijks_"] = df_kbcx0002_2[0].str.split(' % ', 1).str  # split the element within a table
+        df_kbcx0002_2["_Form_"] = df_kbcx0002_2["_Form_"].str.replace(" j", "ans").str.strip()
+        df_kbcx0002_2['Formules'], df_kbcx0002_2['Taux'] = df_kbcx0002_2['_Form_'].str.split(' ', 1).str
+        df_kbcx0002_2 = df_kbcx0002_2.drop(df_kbcx0002_2.columns[0:3], axis=1)  # drop the unintended columns
+        df_kbcx0002_2["Formules"] = "Taux 1/1/1 (+3/-3) de < 25000 pour  " + df_kbcx0002_2["Formules"].astype(str)  # add prefix to str value in df
+        df_kbcx0002_2["Taux"] = df_kbcx0002_2["Taux"].str.replace(",", ".").str.strip()
+
+        df_kbcx0002_2["Taux"] = ((df_kbcx0002_2["Taux"].astype(float) / 100) + (0.25 / 100)) * 100
+
+        # Concatenate rates for >25000 and <25000
+        df_kbcx0002.columns = df_kbcx0002_2.columns
+        data_kbcx0002 = pd.concat([df_kbcx0002, df_kbcx0002_2])
+
+        Min_kbcx0002 = pd.DataFrame({'Min': [''] * 5 + ['0', '11', '16', '21'] * 2})
+        Max_kbcx0002 = pd.DataFrame({'Max': [''] * 5 + ['10', '15', '20', '25'] * 2})
         duration_kbcx0002 = Min_kbcx0002.join(Max_kbcx0002)
 
-        df_kbcx0002.insert(0, 'Provider', 'KBC')
-        df_kbcx0002.insert(1, 'Product_ID', 'KBC0002')
-        df_kbcx0002.insert(2, 'Category', 'Home Loan')
-        df_kbcx0002 = df_kbcx0002.join(duration_kbcx0002)  # join newly made df with existed df
-        df_kbcx0002 = df_kbcx0002[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+        data_kbcx0002.insert(0, 'Provider', 'KBC')
+        data_kbcx0002.insert(1, 'Product_ID', 'KBC0002')
+        data_kbcx0002.insert(2, 'Category', 'Home Loan')
+        data_kbcx0002 = data_kbcx0002.join(duration_kbcx0002)  # join newly made df with existed df
+        data_kbcx0002 = data_kbcx0002[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
     ###############################################################################################################
     ############################################KBC0003###########################################################
-        df_kbcx0003 = read_pdf('https://multimediafiles.kbcgroup.eu/ng/published/KBC/PDF/WONEN/kbc-woningkrediet-tarievenkaart.pdf', encoding='ISO-8859-1',
-                               area=[163.46, 279.31, 291.3, 539.48], pages=1, pandas_options={'header': None})
+        df_kbcx0003_source = read_pdf('https://multimediafiles.kbcgroup.eu/ng/published/KBC/PDF/WONEN/kbc-woningkrediet-tarievenkaart.pdf', encoding='ISO-8859-1',
+                                      area=[163.46, 279.31, 291.3, 539.48], pages=1, pandas_options={'header': None})
 
-        df_kbcx0003 = df_kbcx0003.drop(df_kbcx0003.index[0:5])
+        ## Rate for >25000
+        df_kbcx0003 = df_kbcx0003_source.drop(df_kbcx0003_source.index[0:5])
         df_kbcx0003["_Form_"], df_kbcx0003["_Maandelijks_"] = df_kbcx0003[0].str.split(' % ', 1).str  # split the element within a table
         df_kbcx0003["_Form_"] = df_kbcx0003["_Form_"].str.replace(" j", "ans").str.strip()
         df_kbcx0003['Formules'], df_kbcx0003['Taux'] = df_kbcx0003['_Form_'].str.split(' ', 1).str
         df_kbcx0003 = df_kbcx0003.drop(df_kbcx0003.columns[0:3], axis=1)  # drop the unintended columns
-        df_kbcx0003["Formules"] = "Taux 3/3/3 (+2/onbeperkt) de >25000 pour  " + df_kbcx0003["Formules"].astype(str)  # add prefix to str value in df
+        df_kbcx0003["Formules"] = "Taux 3/3/3 (+2/onbeperkt) de > 25000 pour  " + df_kbcx0003["Formules"].astype(str)  # add prefix to str value in df
+        df_kbcx0003["Taux"] = df_kbcx0003["Taux"].str.replace(",", ".").str.strip()
 
-        Min_kbcx0003 = pd.DataFrame({'Min': [''] * 5 + ['0', '11', '16', '21']})
-        Max_kbcx0003 = pd.DataFrame({'Max': [''] * 5 + ['10', '15', '20', '25']})
+        ## Rate for <25000
+        df_kbcx0003_2 = df_kbcx0003_source.drop(df_kbcx0003_source.index[0:5])
+        df_kbcx0003_2["_Form_"], df_kbcx0003_2["_Maandelijks_"] = df_kbcx0003_2[0].str.split(' % ', 1).str  # split the element within a table
+        df_kbcx0003_2["_Form_"] = df_kbcx0003_2["_Form_"].str.replace(" j", "ans").str.strip()
+        df_kbcx0003_2['Formules'], df_kbcx0003_2['Taux'] = df_kbcx0003_2['_Form_'].str.split(' ', 1).str
+        df_kbcx0003_2 = df_kbcx0003_2.drop(df_kbcx0003_2.columns[0:3], axis=1)  # drop the unintended columns
+        df_kbcx0003_2["Formules"] = "Taux 3/3/3 (+2/onbeperkt) de < 25000 pour  " + df_kbcx0003_2["Formules"].astype(str)  # add prefix to str value in df
+        df_kbcx0003_2["Taux"] = df_kbcx0003_2["Taux"].str.replace(",", ".").str.strip()
+
+        df_kbcx0003_2["Taux"] = ((df_kbcx0003_2["Taux"].astype(float) / 100) + (0.25 / 100)) * 100
+
+        ##Concatenate rates for >25000 and <25000
+        df_kbcx0003.columns = df_kbcx0003_2.columns
+        data_kbcx0003 = pd.concat([df_kbcx0003, df_kbcx0003_2])
+
+        Min_kbcx0003 = pd.DataFrame({'Min': [''] * 5 + ['0', '11', '16', '21'] * 2})
+        Max_kbcx0003 = pd.DataFrame({'Max': [''] * 5 + ['10', '15', '20', '25'] * 2})
         duration_kbcx0003 = Min_kbcx0003.join(Max_kbcx0003)
 
-        df_kbcx0003.insert(0, 'Provider', 'KBC')
-        df_kbcx0003.insert(1, 'Product_ID', 'KBC0003')
-        df_kbcx0003.insert(2, 'Category', 'Home Loan')
-        df_kbcx0003 = df_kbcx0003.join(duration_kbcx0003)  # join newly made df with existed df
-        df_kbcx0003 = df_kbcx0003[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+        data_kbcx0003.insert(0, 'Provider', 'KBC')
+        data_kbcx0003.insert(1, 'Product_ID', 'KBC0003')
+        data_kbcx0003.insert(2, 'Category', 'Home Loan')
+        data_kbcx0003 = data_kbcx0003.join(duration_kbcx0003)  # join newly made df with existed df
+        data_kbcx0003 = data_kbcx0003[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
-    ###############################################################################################################
+        ###############################################################################################################
     ############################################KBC0004###########################################################
-        df_kbcx0004 = read_pdf('https://multimediafiles.kbcgroup.eu/ng/published/KBC/PDF/WONEN/kbc-woningkrediet-tarievenkaart.pdf', encoding='ISO-8859-1',
-                               area=[165.67, 553.43, 289.51, 802.87], pages=1, pandas_options={'header': None})
+        df_kbcx0004_source = read_pdf('https://multimediafiles.kbcgroup.eu/ng/published/KBC/PDF/WONEN/kbc-woningkrediet-tarievenkaart.pdf', encoding='ISO-8859-1',
+                                      area=[165.67, 553.43, 289.51, 802.87], pages=1, pandas_options={'header': None})
 
-        df_kbcx0004 = df_kbcx0004.drop(df_kbcx0004.index[0:5])
+        ## Rate for >25000
+        df_kbcx0004 = df_kbcx0004_source.drop(df_kbcx0004_source.index[0:5])
         df_kbcx0004["_Form_"], df_kbcx0004["_Maandelijks_"] = df_kbcx0004[0].str.split(' % ', 1).str  # split the element within a table
         df_kbcx0004["_Form_"] = df_kbcx0004["_Form_"].str.replace(" j", "ans").str.strip()
         df_kbcx0004['Formules'], df_kbcx0004['Taux'] = df_kbcx0004['_Form_'].str.split(' ', 1).str
         df_kbcx0004 = df_kbcx0004.drop(df_kbcx0004.columns[0:3], axis=1)  # drop the unintended columns
-        df_kbcx0004["Formules"] = "Taux 5/5/5 (+2/onbeperkt) de >25000 pour  " + df_kbcx0004["Formules"].astype(str)  # add prefix to str value in df
+        df_kbcx0004["Formules"] = "Taux 5/5/5 (+2/onbeperkt) de > 25000 pour  " + df_kbcx0004["Formules"].astype(str)  # add prefix to str value in df
+        df_kbcx0004["Taux"] = df_kbcx0004["Taux"].str.replace(",", ".").str.strip()
 
-        Min_kbcx0004 = pd.DataFrame({'Min': [''] * 5 + ['0', '11', '16', '21']})
-        Max_kbcx0004 = pd.DataFrame({'Max': [''] * 5 + ['10', '15', '20', '25']})
+        ## Rate for <25000
+        df_kbcx0004_2 = df_kbcx0004_source.drop(df_kbcx0004_source.index[0:5])
+        df_kbcx0004_2["_Form_"], df_kbcx0004_2["_Maandelijks_"] = df_kbcx0004_2[0].str.split(' % ', 1).str  # split the element within a table
+        df_kbcx0004_2["_Form_"] = df_kbcx0004_2["_Form_"].str.replace(" j", "ans").str.strip()
+        df_kbcx0004_2['Formules'], df_kbcx0004_2['Taux'] = df_kbcx0004_2['_Form_'].str.split(' ', 1).str
+        df_kbcx0004_2 = df_kbcx0004_2.drop(df_kbcx0004_2.columns[0:3], axis=1)  # drop the unintended columns
+        df_kbcx0004_2["Formules"] = "Taux 5/5/5 (+2/onbeperkt) de < 25000 pour  " + df_kbcx0004_2["Formules"].astype(str)  # add prefix to str value in df
+        df_kbcx0004_2["Taux"] = df_kbcx0004_2["Taux"].str.replace(",", ".").str.strip()
+
+        df_kbcx0004_2["Taux"] = ((df_kbcx0004_2["Taux"].astype(float) / 100) + (0.25 / 100)) * 100
+
+        ##Concatenate rates for >25000 and <25000
+        df_kbcx0004.columns = df_kbcx0004_2.columns
+        data_kbcx0004 = pd.concat([df_kbcx0004, df_kbcx0004_2])
+
+        Min_kbcx0004 = pd.DataFrame({'Min': [''] * 5 + ['0', '11', '16', '21'] * 2})
+        Max_kbcx0004 = pd.DataFrame({'Max': [''] * 5 + ['10', '15', '20', '25'] * 2})
         duration_kbcx0004 = Min_kbcx0004.join(Max_kbcx0004)
 
-        df_kbcx0004.insert(0, 'Provider', 'KBC')
-        df_kbcx0004.insert(1, 'Product_ID', 'KBC0004')
-        df_kbcx0004.insert(2, 'Category', 'Home Loan')
-        df_kbcx0004 = df_kbcx0004.join(duration_kbcx0004)  # join newly made df with existed df
-        df_kbcx0004 = df_kbcx0004[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+        data_kbcx0004.insert(0, 'Provider', 'KBC')
+        data_kbcx0004.insert(1, 'Product_ID', 'KBC0004')
+        data_kbcx0004.insert(2, 'Category', 'Home Loan')
+        data_kbcx0004 = data_kbcx0004.join(duration_kbcx0004)  # join newly made df with existed df
+        data_kbcx0004 = data_kbcx0004[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
         kbcx_c = pd.concat([
-            pd.concat([df_kbcx0001], axis=1),
-            pd.concat([df_kbcx0002], axis=1),
-            pd.concat([df_kbcx0003], axis=1),
-            pd.concat([df_kbcx0004], axis=1)
+            pd.concat([data_kbcx0001], axis=1),
+            pd.concat([data_kbcx0002], axis=1),
+            pd.concat([data_kbcx0003], axis=1),
+            pd.concat([data_kbcx0004], axis=1)
         ])
 
         print(tabulate(kbcx_c, headers='keys', tablefmt='psql', showindex="never"))
@@ -1970,6 +2384,7 @@ def keytrade():
         df_keyt0001.drop('_Maandelijks_', axis=1, inplace=True)
         df_keyt0001.drop('_Taux_', axis=1, inplace=True)
         df_keyt0001["Taux"] = df_keyt0001["Taux"].str.replace("%", "").str.strip()
+        df_keyt0001["Taux"] = df_keyt0001["Taux"].str.replace(",", ".").str.strip()
 
         Min_keyt0001 = pd.DataFrame({'Min': [''] * 5 + ['5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25']})
         Max_keyt0001 = pd.DataFrame({'Max': [''] * 5 + ['5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25']})
@@ -2039,6 +2454,8 @@ def nage():
         duration_nage0001 = Min_nage0001.join(Max_nage0001)
 
         df_nage0001 = taux_nage0001.join(formules_nage0001).join(duration_nage0001)
+        df_nage0001["Taux"] = df_nage0001["Taux"].str.replace(",", ".").str.strip()
+        df_nage0001["Taux"] = ((df_nage0001["Taux"].astype(float) / 100) + (0.30 / 100)) * 100
 
         df_nage0001.insert(0, 'Provider', 'Nagelmackers')
         df_nage0001.insert(1, 'Product_ID', 'NA0001')
@@ -2071,6 +2488,8 @@ def nage():
         duration_nage0002 = Min_nage0002.join(Max_nage0002)
 
         df_nage0002 = taux_nage0002.join(formules_nage0002).join(duration_nage0002)
+        df_nage0002["Taux"] = df_nage0002["Taux"].str.replace(",", ".").str.strip()
+        df_nage0002["Taux"] = ((df_nage0002["Taux"].astype(float) / 100) + (0.30 / 100)) * 100
 
         df_nage0002.insert(0, 'Provider', 'Nagelmackers')
         df_nage0002.insert(1, 'Product_ID', 'NA0002')
@@ -2105,6 +2524,8 @@ def nage():
         duration_nage0003 = Min_nage0003.join(Max_nage0003)
 
         df_nage0003 = taux_nage0003.join(formules_nage0003).join(duration_nage0003)
+        df_nage0003["Taux"] = df_nage0003["Taux"].str.replace(",", ".").str.strip()
+        df_nage0003["Taux"] = ((df_nage0003["Taux"].astype(float) / 100) + (0.30 / 100)) * 100
 
         df_nage0003.insert(0, 'Provider', 'Nagelmackers')
         df_nage0003.insert(1, 'Product_ID', 'NA0003')
@@ -2133,6 +2554,8 @@ def nage():
         duration_nage0004 = Min_nage0004.join(Max_nage0004)
 
         df_nage0004 = taux_nage0004.join(formules_nage0004).join(duration_nage0004)
+        df_nage0004["Taux"] = df_nage0004["Taux"].str.replace(",", ".").str.strip()
+        df_nage0004["Taux"] = ((df_nage0004["Taux"].astype(float) / 100) + (0.30 / 100)) * 100
 
         df_nage0004.insert(0, 'Provider', 'Nagelmackers')
         df_nage0004.insert(1, 'Product_ID', 'NA0004')
@@ -2168,6 +2591,8 @@ def nage():
         duration_nage0005 = Min_nage0005.join(Max_nage0005)
 
         df_nage0005 = taux_nage0005.join(formules_nage0005).join(duration_nage0005)
+        df_nage0005["Taux"] = df_nage0005["Taux"].str.replace(",", ".").str.strip()
+        df_nage0005["Taux"] = ((df_nage0005["Taux"].astype(float) / 100) + (0.30 / 100)) * 100
 
         df_nage0005.insert(0, 'Provider', 'Nagelmackers')
         df_nage0005.insert(1, 'Product_ID', 'NA0005')
@@ -2210,88 +2635,156 @@ def trio():
     ############################################TRIO0001###########################################################
     try:
         global trio_c
-        df_trio = read_pdf('https://www.triodos.be/downloads/downloads-fr/tarifs-et-conditions/liste-tarifs-credit-hypothecaire.pdf', encoding='ISO-8859-1',
-                           stream=True, spreadsheet=True, area=[597.86, 41.41, 619.05, 482.23], pages=1, pandas_options={'header': None})
+        df_trio_source = read_pdf('https://www.triodos.be/downloads/downloads-fr/tarifs-et-conditions/liste-tarifs-credit-hypothecaire.pdf', encoding='ISO-8859-1',
+                                  stream=True, spreadsheet=True, area=[597.86, 41.41, 619.05, 482.23], pages=1, pandas_options={'header': None})
 
-        df_trio0001 = df_trio.drop(df_trio.columns[0:2], axis=1).drop(df_trio.columns[3], axis=1)
+        ## Rate of >75000
+        df_trio0001 = df_trio_source.drop(df_trio_source.columns[0:2], axis=1).drop(df_trio_source.columns[3], axis=1)
         df_trio0001.columns = ["Taux"]
         df_trio0001["Taux"] = df_trio0001["Taux"].str.replace("%", "").str.strip()
+        df_trio0001["Taux"] = df_trio0001["Taux"].str.replace(",", ".").str.strip()
+        df_trio0001["Taux"] = ((df_trio0001["Taux"].astype(float) / 100) + (0.25 / 100)) * 100
 
-        Min_trio0001 = pd.DataFrame({'Min': ['0']})
-        Max_trio0001 = pd.DataFrame({'Max': ['10']})
+        ## Rate of <75000
+        df_trio0001_2 = df_trio_source.drop(df_trio_source.columns[0:2], axis=1).drop(df_trio_source.columns[3], axis=1)
+        df_trio0001_2.columns = ["Taux"]
+        df_trio0001_2["Taux"] = df_trio0001_2["Taux"].str.replace("%", "").str.strip()
+        df_trio0001_2["Taux"] = df_trio0001_2["Taux"].str.replace(",", ".").str.strip()
+        df_trio0001_2["Taux"] = ((df_trio0001_2["Taux"].astype(float) / 100) + (0.25 / 100) + (0.75 / 100)) * 100
+
+        Min_trio0001 = pd.DataFrame({'Min': ['0'] * 2})
+        Max_trio0001 = pd.DataFrame({'Max': ['10'] * 2})
         duration_trio0001 = Min_trio0001.join(Max_trio0001)
 
-        df_trio0001.insert(0, 'Provider', 'Triodos')
-        df_trio0001.insert(1, 'Product_ID', 'TRIO0001')
-        df_trio0001.insert(2, 'Category', 'Home Loan')
-        df_trio0001.insert(3, 'Formules', 'Taux Fixe de 10ans')
-        df_trio0001 = df_trio0001.join(duration_trio0001)  # join newly made df with existed df
-        df_trio0001 = df_trio0001[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+        ##Concatenate rates for >25000 and <25000
+        df_trio0001.columns = df_trio0001_2.columns
+        data_trio0001 = pd.concat([df_trio0001, df_trio0001_2])
+
+        data_trio0001.insert(0, 'Provider', 'Triodos')
+        data_trio0001.insert(1, 'Product_ID', 'TRIO0001')
+        data_trio0001.insert(2, 'Category', 'Home Loan')
+        data_trio0001.insert(3, 'Formules', 'Taux Fixe de 10ans')
+        data_trio0001 = data_trio0001.join(duration_trio0001)  # join newly made df with existed df
+        data_trio0001 = data_trio0001[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
     ###############################################################################################################
     ############################################TRIO0002###########################################################
-        df_trio2 = read_pdf('https://www.triodos.be/downloads/downloads-fr/tarifs-et-conditions/liste-tarifs-credit-hypothecaire.pdf', encoding='ISO-8859-1',
-                           stream=True, spreadsheet=True, area=[385.45, 38.94, 447.13, 484.8], pages=1, pandas_options={'header': None})
+        df_trio0002_source = read_pdf('https://www.triodos.be/downloads/downloads-fr/tarifs-et-conditions/liste-tarifs-credit-hypothecaire.pdf', encoding='ISO-8859-1',
+                                      stream=True, spreadsheet=True, area=[385.45, 38.94, 447.13, 484.8], pages=1, pandas_options={'header': None})
 
-        df_trio0002 = df_trio2.drop(df_trio2.index[1:3])
+        ## Rate of >75000
+        df_trio0002 = df_trio0002_source.drop(df_trio0002_source.index[1:3])
         df_trio0002 = df_trio0002.drop(df_trio0002.columns[0:3], axis=1).drop(df_trio0002.columns[4], axis=1)
         df_trio0002.columns = ["Taux"]
         df_trio0002["Taux"] = df_trio0002["Taux"].str.replace("%", "").str.strip()
+        df_trio0002["Taux"] = df_trio0002["Taux"].str.replace(",", ".").str.strip()
+        df_trio0002["Taux"] = ((df_trio0002["Taux"].astype(float) / 100) + (0.25 / 100)) * 100
+        df_trio0002.insert(0, 'Formules', '> 75000 5+5')
 
-        Min_trio0002 = pd.DataFrame({'Min': ['10']})
-        Max_trio0002 = pd.DataFrame({'Max': ['25']})
+        ## Rate of <75000
+        df_trio0002_2 = df_trio0002_source.drop(df_trio0002_source.index[1:3])
+        df_trio0002_2 = df_trio0002_2.drop(df_trio0002_2.columns[0:3], axis=1).drop(df_trio0002_2.columns[4], axis=1)
+        df_trio0002_2.columns = ["Taux"]
+        df_trio0002_2["Taux"] = df_trio0002_2["Taux"].str.replace("%", "").str.strip()
+        df_trio0002_2["Taux"] = df_trio0002_2["Taux"].str.replace(",", ".").str.strip()
+        df_trio0002_2["Taux"] = ((df_trio0002_2["Taux"].astype(float) / 100) + (0.25 / 100) + (0.75 / 100)) * 100
+        df_trio0002_2.insert(0, 'Formules', '< 75000 5+5')
+
+        Min_trio0002 = pd.DataFrame({'Min': ['0'] * 2})
+        Max_trio0002 = pd.DataFrame({'Max': ['10'] * 2})
         duration_trio0002 = Min_trio0002.join(Max_trio0002)
 
-        df_trio0002.insert(0, 'Provider', 'Triodos')
-        df_trio0002.insert(1, 'Product_ID', 'TRIO0002')
-        df_trio0002.insert(2, 'Category', 'Home Loan')
-        df_trio0002.insert(3, 'Formules', '5+5')
-        df_trio0002 = df_trio0002.join(duration_trio0002)  # join newly made df with existed df
-        df_trio0002 = df_trio0002[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+        ##Concatenate rates for >25000 and <25000
+        df_trio0002.columns = df_trio0002_2.columns
+        data_trio0002 = pd.concat([df_trio0002, df_trio0002_2])
 
-    ###############################################################################################################
+        data_trio0002.insert(0, 'Provider', 'Triodos')
+        data_trio0002.insert(1, 'Product_ID', 'TRIO0002')
+        data_trio0002.insert(2, 'Category', 'Home Loan')
+        data_trio0002 = data_trio0002.join(duration_trio0002)  # join newly made df with existed df
+        data_trio0002 = data_trio0002[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+
+        ###############################################################################################################
     ############################################TRIO0003###########################################################
 
-        df_trio0003 = df_trio2.drop(df_trio2.index[0]).drop(df_trio2.index[2:3])
+        df_trio0003_source = read_pdf('https://www.triodos.be/downloads/downloads-fr/tarifs-et-conditions/liste-tarifs-credit-hypothecaire.pdf', encoding='ISO-8859-1',
+                                      stream=True, spreadsheet=True, area=[385.45, 38.94, 447.13, 484.8], pages=1, pandas_options={'header': None})
+
+        ## Rate of >75000
+        df_trio0003 = df_trio0003_source.drop(df_trio0003_source.index[0]).drop(df_trio0003_source.index[2:3])
         df_trio0003 = df_trio0003.drop(df_trio0003.columns[0:3], axis=1).drop(df_trio0003.columns[4], axis=1)
         df_trio0003.columns = ["Taux"]
         df_trio0003["Taux"] = df_trio0003["Taux"].str.replace("%", "").str.strip()
+        df_trio0003["Taux"] = df_trio0003["Taux"].str.replace(",", ".").str.strip()
+        df_trio0003["Taux"] = ((df_trio0003["Taux"].astype(float) / 100) + (0.25 / 100)) * 100
+        df_trio0003.insert(0, 'Formules', '> 75000 13+5')
 
-        Min_trio0003 = pd.DataFrame({'Min': ['', '10']})
-        Max_trio0003 = pd.DataFrame({'Max': ['', '25']})
+        # Rate of <75000
+        df_trio0003_2 = df_trio0003_source.drop(df_trio0003_source.index[0]).drop(df_trio0003_source.index[2:3])
+        df_trio0003_2 = df_trio0003_2.drop(df_trio0003_2.columns[0:3], axis=1).drop(df_trio0003_2.columns[4], axis=1)
+        df_trio0003_2.columns = ["Taux"]
+        df_trio0003_2["Taux"] = df_trio0003_2["Taux"].str.replace("%", "").str.strip()
+        df_trio0003_2["Taux"] = df_trio0003_2["Taux"].str.replace(",", ".").str.strip()
+        df_trio0003_2["Taux"] = ((df_trio0003_2["Taux"].astype(float) / 100) + (0.25 / 100) + (0.75 / 100)) * 100
+        df_trio0003_2.insert(0, 'Formules', '< 75000 13+5')
+
+        Min_trio0003 = pd.DataFrame({'Min': ['0'] * 2})
+        Max_trio0003 = pd.DataFrame({'Max': ['10'] * 2})
         duration_trio0003 = Min_trio0003.join(Max_trio0003)
 
-        df_trio0003.insert(0, 'Provider', 'Triodos')
-        df_trio0003.insert(1, 'Product_ID', 'TRIO0003')
-        df_trio0003.insert(2, 'Category', 'Home Loan')
-        df_trio0003.insert(3, 'Formules', '13+5')
-        df_trio0003 = df_trio0003.join(duration_trio0003)  # join newly made df with existed df
-        df_trio0003 = df_trio0003[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+        ##Concatenate rates for >25000 and <25000
+        df_trio0003.columns = df_trio0003_2.columns
+        data_trio0003 = pd.concat([df_trio0003, df_trio0003_2])
+
+        data_trio0003.insert(0, 'Provider', 'Triodos')
+        data_trio0003.insert(1, 'Product_ID', 'TRIO0003')
+        data_trio0003.insert(2, 'Category', 'Home Loan')
+        data_trio0003 = data_trio0003.join(duration_trio0003)  # join newly made df with existed df
+        data_trio0003 = data_trio0003[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
     ###############################################################################################################
     ############################################TRIO0004###########################################################
 
-        df_trio0004 = df_trio2.drop(df_trio2.index[0:2])
+        df_trio0004_source = read_pdf('https://www.triodos.be/downloads/downloads-fr/tarifs-et-conditions/liste-tarifs-credit-hypothecaire.pdf', encoding='ISO-8859-1',
+                                      stream=True, spreadsheet=True, area=[385.45, 38.94, 447.13, 484.8], pages=1, pandas_options={'header': None})
+
+        ## Rate of >75000
+        df_trio0004 = df_trio0004_source.drop(df_trio0004_source.index[0:2])
         df_trio0004 = df_trio0004.drop(df_trio0004.columns[0:3], axis=1).drop(df_trio0004.columns[4], axis=1)
         df_trio0004.columns = ["Taux"]
         df_trio0004["Taux"] = df_trio0004["Taux"].str.replace("%", "").str.strip()
+        df_trio0004["Taux"] = df_trio0004["Taux"].str.replace(",", ".").str.strip()
+        df_trio0004["Taux"] = ((df_trio0004["Taux"].astype(float) / 100) + (0.25 / 100)) * 100
+        df_trio0004.insert(0, 'Formules', '> 75000 16+5')
 
-        Min_trio0004 = pd.DataFrame({'Min': [''] * 2 + ['10']})
-        Max_trio0004 = pd.DataFrame({'Max': [''] * 2 + ['25']})
+        # Rate of <75000
+        df_trio0004_2 = df_trio0004_source.drop(df_trio0004_source.index[0:2])
+        df_trio0004_2 = df_trio0004_2.drop(df_trio0004_2.columns[0:3], axis=1).drop(df_trio0004_2.columns[4], axis=1)
+        df_trio0004_2.columns = ["Taux"]
+        df_trio0004_2["Taux"] = df_trio0004_2["Taux"].str.replace("%", "").str.strip()
+        df_trio0004_2["Taux"] = df_trio0004_2["Taux"].str.replace(",", ".").str.strip()
+        df_trio0004_2["Taux"] = ((df_trio0004_2["Taux"].astype(float) / 100) + (0.25 / 100) + (0.75 / 100)) * 100
+        df_trio0004_2.insert(0, 'Formules', '< 75000 16+5')
+
+        Min_trio0004 = pd.DataFrame({'Min': [''] * 2 + ['0'] * 2})
+        Max_trio0004 = pd.DataFrame({'Max': [''] * 2 + ['10'] * 2})
         duration_trio0004 = Min_trio0004.join(Max_trio0004)
 
-        df_trio0004.insert(0, 'Provider', 'Triodos')
-        df_trio0004.insert(1, 'Product_ID', 'TRIO0004')
-        df_trio0004.insert(2, 'Category', 'Home Loan')
-        df_trio0004.insert(3, 'Formules', '16+5')
-        df_trio0004 = df_trio0004.join(duration_trio0004)  # join newly made df with existed df
-        df_trio0004 = df_trio0004[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
+        ##Concatenate rates for >25000 and <25000
+        df_trio0004.columns = df_trio0004_2.columns
+        data_trio0004 = pd.concat([df_trio0004, df_trio0004_2])
+
+        data_trio0004.insert(0, 'Provider', 'Triodos')
+        data_trio0004.insert(1, 'Product_ID', 'TRIO0004')
+        data_trio0004.insert(2, 'Category', 'Home Loan')
+        data_trio0004 = data_trio0004.join(duration_trio0004)  # join newly made df with existed df
+        data_trio0004 = data_trio0004[['Provider', 'Product_ID', 'Category', 'Formules', 'Min', 'Max', 'Taux']]  # Change order of columns
 
         trio_c = pd.concat([
-            pd.concat([df_trio0001], axis=1),
-            pd.concat([df_trio0002], axis=1),
-            pd.concat([df_trio0003], axis=1),
-            pd.concat([df_trio0004], axis=1)])
+            pd.concat([data_trio0001], axis=1),
+            pd.concat([data_trio0002], axis=1),
+            pd.concat([data_trio0003], axis=1),
+            pd.concat([data_trio0004], axis=1)])
 
         print(tabulate(trio_c, headers='keys', tablefmt='psql', showindex="never"))
     except:
